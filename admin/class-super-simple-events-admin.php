@@ -544,14 +544,14 @@ class Super_Simple_Events_Admin {
             );
             
             // Add the site name field to the section of the settings page
-            add_settings_field(
+          /*  add_settings_field(
                 'override_templete',
                 'Override Templete',
                 array( $this, 'settings_checkbox' ),
                 $this->plugin->get_plugin_slug(),
                 $this->plugin->setting_section_id,
                 array('id' => 'override_templete')
-            );
+            );*/
             
             // Add the site name field to the section of the settings page
             add_settings_field(

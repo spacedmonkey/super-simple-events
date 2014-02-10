@@ -167,6 +167,10 @@ class Super_Simple_Events {
 		
 		// Filter posts
 		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
+		
+		if($this->get_option('display_meta') === 1){
+			add_filter( 'the_content', array( $this, 'the_content' ), 99, 1 );
+		}
 
 	}
 
@@ -196,7 +200,8 @@ class Super_Simple_Events {
 		$this->default_options = array(
 										'post_type_slug' => 'events', 
 										'taxonomy_slug' => 'eventtype', 
-										'roles' => array('administrator','editor', 'author')
+										'roles' => array('administrator','editor', 'author'),
+										'display_meta' => 1
 								);
 		return apply_filters($this->get_plugin_slug().'_default_options', $this->default_options);
 	}
@@ -544,6 +549,11 @@ class Super_Simple_Events {
 		return wp_parse_args($this->query_vars, $vars);
 	}
 	
+	/**
+	 * Add rewrite rule
+	 * 
+	 * @since    1.0.0
+	 */
 	protected function add_rewrite_rule(){
 		$count = 1;
 		$query = "";
@@ -558,6 +568,14 @@ class Super_Simple_Events {
 		}
 	}
 	
+	/**
+	 * 
+	 * Add filter content for event archives.
+	 * 
+	 * @since    1.0
+     * @author   Jonathan Harris <jon@spacedmonkey.co.uk>
+	 * @param object $query
+	 */
 	protected function pre_get_posts($query){
 		if($query->is_post_type_archive($this->get_plugin_slug()) && $query->is_main_query() ){
 			
@@ -606,5 +624,16 @@ class Super_Simple_Events {
 		return $query;
 	}
 	
-
+	/**
+	 * Filter the content and add the meta to start
+	 * 
+	 * @param string $content
+	 */
+	protected function the_content($content){
+		global $post;
+		if($post->post_type == $this->get_plugin_slug()){
+			$content .= "Testing";
+		}
+		return $content;
+	}
 }
