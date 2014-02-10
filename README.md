@@ -1,4 +1,4 @@
-super-simple-events
+Super Simple Events
 ===================
 
-Super Simple Events WordPress Plugin
+Super Simple Events WordPress Plugin. This plugin is currently in development, please do not use.
