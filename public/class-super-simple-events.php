@@ -376,7 +376,12 @@ class Super_Simple_Events {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-		wp_enqueue_style( self::PLUGIN_SLUG . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
+	
+		if(!$this->is_higher_38()){
+			wp_enqueue_style( 'dashicons', plugins_url( 'assets/css/dashicons.css', __FILE__ ), array(), self::VERSION );
+		}
+		
+		wp_enqueue_style( self::PLUGIN_SLUG . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array( 'dashicons' ), self::VERSION );
 	}
 
 	/**
