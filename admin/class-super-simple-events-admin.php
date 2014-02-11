@@ -582,6 +582,16 @@ class Super_Simple_Events_Admin {
                 $this->plugin->setting_section_id,
                 array('id' => 'taxonomy_slug')
             );
+
+			// Add the site name field to the section of the settings page
+            add_settings_field(
+                'date_format',
+                'Display Date Format',
+                array( $this, 'settings_text' ),
+                $this->plugin->get_plugin_slug(),
+                $this->plugin->setting_section_id,
+                array('id' => 'date_format')
+            );
             
              // Add the site name field to the section of the settings page
             add_settings_field(
@@ -612,7 +622,17 @@ class Super_Simple_Events_Admin {
                 $this->plugin->setting_section_id,
                 array('id' => 'display_meta')
             );
+
+			add_settings_field(
+                'hide_old_events',
+                'Hide Past Events',
+                array( $this, 'settings_checkbox' ),
+                $this->plugin->get_plugin_slug(),
+                $this->plugin->setting_section_id,
+                array('id' => 'hide_old_events')
+            );
             
+
         }
          
         /**
@@ -626,9 +646,9 @@ class Super_Simple_Events_Admin {
         {
             $new_input = $input;
 
-            $new_input['override_templete'] = isset( $input['override_templete'] );
-			$new_input['display_meta'] = isset( $input['display_meta'] );
-            
+            $new_input['override_templete'] = intval( $input['override_templete'] );
+			$new_input['display_meta'] = isset( $input['display_meta'] ) ? $input['display_meta'] : 0;
+            $new_input['hide_old_events'] = isset( $input['hide_old_events'] ) ? $input['hide_old_events'] : 0;
          
             return $new_input;
         }
@@ -658,13 +678,14 @@ class Super_Simple_Events_Admin {
         
         public function settings_checkbox($args)
         {
-			$id = $args['id'];
+			
+			$id = $args['id']; 
             printf(
                 __('<input type="checkbox" id="%s" name="%s[%s]" value="1" %s />', $this->plugin->get_plugin_slug()),
                 $id,
                 $this->plugin->option_name,
                 $id,
-                checked( $this->plugin->options[$id], "1" , false)
+                checked( !empty($this->plugin->options[$id]), "1" , false)
             );
         }
          

@@ -41,6 +41,13 @@ register_deactivation_hook( __FILE__, array( 'Super_Simple_Events', 'deactivate'
 add_action( 'plugins_loaded', array( 'Super_Simple_Events', 'get_instance' ) );
 
 /*----------------------------------------------------------------------------*
+ * Widget Functionality
+ *----------------------------------------------------------------------------*/
+require_once( plugin_dir_path( __FILE__ ) . 'widget/class-super-simple-events-widget.php' );
+
+add_action( 'widgets_init', create_function( '', 'register_widget("Super_Simple_Events_Widget");' ) );
+
+/*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
  *----------------------------------------------------------------------------*/
 

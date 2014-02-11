@@ -163,12 +163,12 @@ class Super_Simple_Events {
 		
 		// Register URL rewrites
 		add_filter( 'query_vars', array( $this, 'query_vars' ) , 10, 1 );
-		add_action( 'init', array( $this, 'add_rewrite_rule' ) );
+		//add_action( 'init', array( $this, 'add_rewrite_rule' ) );
 		
 		// Filter posts
 		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
-		
-		if($this->get_option('display_meta') === 1){
+
+		if($this->get_option('display_meta') === "1"){
 			add_filter( 'the_content', array( $this, 'the_content' ), 99, 1 );
 		}
 
@@ -201,7 +201,9 @@ class Super_Simple_Events {
 										'post_type_slug' => 'events', 
 										'taxonomy_slug' => 'eventtype', 
 										'roles' => array('administrator','editor', 'author'),
-										'display_meta' => 1
+										'display_meta' => '1', 
+										'hide_old_events' => '1', 
+										'date_format' => 'dS M Y'
 								);
 		return apply_filters($this->get_plugin_slug().'_default_options', $this->default_options);
 	}
@@ -482,7 +484,7 @@ class Super_Simple_Events {
 			'label'               => __( 'super-simply-event', $this->get_plugin_slug() ),
 			'description'         => __( 'Events information pages', $this->get_plugin_slug() ),
 			'labels'              => $labels,
-			'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'trackbacks', 'revisions', ),
+			'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'trackbacks', 'revisions', 'publicize', 'wpcom-markdown' ),
 			'taxonomies'          => array( 'super-simply-event-type' ),
 			'hierarchical'        => false,
 			'public'              => true,
@@ -577,8 +579,9 @@ class Super_Simple_Events {
 	 * @param object $query
 	 */
 	public function pre_get_posts($query){
-		if($query->is_post_type_archive($this->get_plugin_slug()) && $query->is_main_query() ){
-			
+		if($query->is_post_type_archive($this->get_plugin_slug()) && $query->is_main_query() && !is_admin()){
+			$meta_query = $query->get('meta_query');
+
 			$this_year = get_query_var('sse_year');
 			$this_month = get_query_var('sse_month');
 			$this_day = get_query_var('sse_day');
@@ -608,17 +611,23 @@ class Super_Simple_Events {
 				$end_date   = "$end_year-$end_month-$end_day";
 				
 				$start_date_unix = strtotime($start_date);
-				$end_date_unix   = strtotime($end_date);
+				$end_date_unix   = strtotime($end_date);				
 				
-				$meta_query = $query->get('meta_query');
-				$meta_query[] = array(
-									'key' => 'between_dates',
-									'value' => array($start_date_unix,$end_date_unix),
-									'compare' => 'BETWEEN'
-								);
-				$query->set('meta_query', $meta_query);
+			}else{
+				if($this->get_option('hide_old_events') == "1"){
+					$meta_query[] = array(
+							'key' => 'between_dates',
+							'value' => current_time( 'mysql'),
+							'compare' => '>='
+						);
+				}
 				
 			}
+			$query->set('meta_query', $meta_query);
+			$query->set('orderby','meta_value');
+			$query->set('order','ASC');
+			$query->set('meta_key','sse_start_date_alt');
+
 			
 		}
 		return $query;
@@ -636,7 +645,7 @@ class Super_Simple_Events {
 		if($post->post_type == $this->get_plugin_slug()){
 			$time = $date = $location = "";
 			
-			$date_format = "d M Y";
+			$date_format = $this->get_option('date_format');
 			
 
 			$start_date_post = get_post_meta($post->ID,'sse_start_date_alt',true);
@@ -662,7 +671,6 @@ class Super_Simple_Events {
 			
 			
 			$meta = sprintf(__('<div class="sse-meta">%1$s%2$s%3$s</div>', $this->get_plugin_slug()),$time, $date, $location );
-			
 			$new_content = $meta . $content;
 		}
 		return $new_content;
