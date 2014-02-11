@@ -3,19 +3,19 @@ Super Simple Events
 
 Super Simple Events WordPress Plugin. This plugin is currently in development, please do not use.
 
-### Installation
+## Installation
 
 This section describes how to install the plugin and get it working.
 
 
-## Using The WordPress Dashboard =
+### Using The WordPress Dashboard 
 
 1. Navigate to the 'Add New' in the plugins dashboard
 2. Search for 'super-simple-events'
 3. Click 'Install Now'
 4. Activate the plugin on the Plugin dashboard
 
-## Uploading in WordPress Dashboard
+### Uploading in WordPress Dashboard
 
 1. Navigate to the 'Add New' in the plugins dashboard
 2. Navigate to the 'Upload' area
@@ -23,14 +23,14 @@ This section describes how to install the plugin and get it working.
 4. Click 'Install Now'
 5. Activate the plugin in the Plugin dashboard
 
-## Using FTP 
+### Using FTP 
 1. Download `super-simple-events.zip`
 2. Extract the `super-simple-events` directory to your computer
 3. Upload the `super-simple-events` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
 
 
-### GitHub Updater
+## GitHub Updater
 
 The Super Simple Events includes native support for the [GitHub Updater](https://github.com/afragen/github-updater) which allows you to provide updates to your WordPress plugin from GitHub.
 
