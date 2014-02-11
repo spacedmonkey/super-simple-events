@@ -5,7 +5,7 @@
  * @package   Super_Simple_Events_Admin
  * @author    Jonathan Harris <jon@spacedmonkey.co.uk>
  * @license   GPL-2.0+
- * @link      http://example.com
+ * @link      http://www.jonathandavidharris.co.uk/
  * @copyright 2014 Spacedmonkey
  */
 

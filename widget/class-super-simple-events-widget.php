@@ -1,11 +1,33 @@
 <?php
+/**
+ * Super Simple Events
+ *
+ * @package   Super_Simple_Events_Admin
+ * @author    Jonathan Harris <jon@spacedmonkey.co.uk>
+ * @license   GPL-2.0+
+ * @link      http://www.jonathandavidharris.co.uk/
+ * @copyright 2014 Spacedmonkey
+ */
 
-
-/
+/**
+ * Widget class. 
+ *
+ *
+ * @package  Super_Simple_Events_Widget
+ * @abstract WP_Widget
+ * @author   Jonathan Harris <jon@spacedmonkey.co.uk>
+ */
 class Super_Simple_Events_Widget extends WP_Widget {
 	
+	/**
+	 * Create a string that is a unique string for this widget
+	 * 
+	 * @var 	  String
+	 * @since     1.0.0
+	 */
 
 	protected $widget_id = null;
+	
 	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
@@ -32,8 +54,6 @@ class Super_Simple_Events_Widget extends WP_Widget {
 		$this->plugin = Super_Simple_Events::get_instance();
 		$this->widget_id = $this->plugin->get_plugin_slug().'-id';
 
-		// TODO: update widget-name-id, classname and description
-		// TODO: replace 'widget-name-locale' to be named more plugin specific. Other instances exist throughout the code, too.
 		parent::__construct(
 			$this->widget_id, 
 			__( $this->plugin->get_plugin_name(), $this->plugin->get_plugin_slug() ),
@@ -64,6 +84,7 @@ class Super_Simple_Events_Widget extends WP_Widget {
 	 *
 	 * @param array args  The array of form elements
 	 * @param array instance The current instance of the widget
+	 * @since     1.0.0
 	 */
 	public function widget( $args, $instance ) {
 
@@ -114,7 +135,6 @@ class Super_Simple_Events_Widget extends WP_Widget {
 		$widget_string .= $before_title;
 		$widget_string .= $title; // Can set this with a widget option, or omit altogether
 		$widget_string .= $after_title;
-		// TODO: Here is where you manipulate your widget's values based on their input fields
 		ob_start();
 		include( plugin_dir_path( __FILE__ ) . 'views/widget.php' );
 		$widget_string .= ob_get_clean();
@@ -125,11 +145,15 @@ class Super_Simple_Events_Widget extends WP_Widget {
 
 		wp_cache_set($this->widget_id, $cache, 'widget' );
 
-		print $widget_string;
+		echo $widget_string;
 
 	} // end widget
 	
-	
+	/**
+	 * Flush Widget Cache
+	 * 
+	 * @since     1.0.0
+	 */
 	public function flush_widget_cache() 
 	{
     	wp_cache_delete( $this->widget_id, 'widget' );
@@ -144,8 +168,6 @@ class Super_Simple_Events_Widget extends WP_Widget {
 
 		$instance = $old_instance;
 
-		// TODO: Here is where you update your widget's old values with the new, incoming values
-
 		return $instance;
 
 	} // end widget
@@ -154,15 +176,13 @@ class Super_Simple_Events_Widget extends WP_Widget {
 	 * Generates the administration form for the widget.
 	 *
 	 * @param array instance The array of keys and values for the widget.
+	 * @since     1.0.0
 	 */
 	public function form( $instance ) {
 
-		// TODO: Define default values for your variables
 		$instance = wp_parse_args(
 			(array) $instance
 		);
-
-		// TODO: Store the values of the widget in their own variable
 
 		// Display the admin form
 		include( plugin_dir_path(__FILE__) . 'views/admin.php' );
@@ -176,10 +196,11 @@ class Super_Simple_Events_Widget extends WP_Widget {
 
 	/**
 	 * Registers and enqueues widget-specific styles.
+	 * 
+	 * @since     1.0.0
 	 */
 	public function register_widget_styles() {
 
-		// TODO: Change 'widget-name' to the name of your plugin
 		wp_enqueue_style( $this->plugin->get_plugin_slug().'-widget-styles', plugins_url( 'css/widget.css', __FILE__ ) );
 
 	} // end register_widget_styles
