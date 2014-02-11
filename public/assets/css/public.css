@@ -1,1 +1,8 @@
 /* This stylesheet is used to style the public-facing components of the plugin. */
+
+.sse-section .dashicons{
+	 vertical-align: bottom;
+}
+.sse-meta{
+	margin: 0px 0px 1em;
+}

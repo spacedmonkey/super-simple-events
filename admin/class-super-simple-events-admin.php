@@ -63,7 +63,9 @@ class Super_Simple_Events_Admin {
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_post_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_post_scripts' ) );
 
 
 		// Register settings
@@ -79,7 +81,7 @@ class Super_Simple_Events_Admin {
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
 
-		add_action('add_meta_boxes', array($this,'add_meta_boxes'));
+		add_action('add_meta_boxes', array($this,'add_meta_boxes'), 1);
 		add_action( 'save_post', array($this,'save_post') );
 		/*
 		 * Define custom functionality.
@@ -124,8 +126,9 @@ class Super_Simple_Events_Admin {
 	 */
 	public function enqueue_admin_styles() {
 		global $post;
-	
-		if ( ! isset( $this->plugin_screen_hook_suffix ) && ! isset( $post->post_type )) {
+		
+		
+		if ( ! isset( $this->plugin_screen_hook_suffix )) {
 			return;
 		}
 
@@ -133,10 +136,29 @@ class Super_Simple_Events_Admin {
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
 			wp_enqueue_style( $this->plugin->get_plugin_slug() .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Super_Simple_Events::VERSION );
 		}
+				
+			
+	}
+
+/**
+	 * Register and enqueue admin-specific style sheet.
+	 *
+	 *
+	 * @since     1.0.0
+	 *
+	 * @return    null    Return early if no settings page is registered.
+	 */
+	public function enqueue_admin_post_styles() {
+		global $post;
 		
+		
+		if ( ! isset( $post->post_type )) {
+			return;
+		}
+
+				
 		if ( $this->plugin->get_plugin_slug() == $post->post_type ) {
 			wp_enqueue_style( $this->plugin->get_plugin_slug() .'-post-styles', plugins_url( 'assets/css/jquery-ui-1.10.4.custom.min.css', __FILE__ ), array(), Super_Simple_Events::VERSION );
-			
 			
 			
 		}
@@ -222,7 +244,7 @@ class Super_Simple_Events_Admin {
 		global $post, $wp_locale;
 		
 
-		if ( ! isset( $this->plugin_screen_hook_suffix ) && ! isset( $post->post_type )) {
+		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}
 
@@ -230,6 +252,31 @@ class Super_Simple_Events_Admin {
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
 			wp_enqueue_script( $this->plugin->get_plugin_slug() . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Super_Simple_Events::VERSION );
 		}
+		
+	
+
+	}
+
+
+
+	
+	/**
+	 * Register and enqueue admin-specific JavaScript.
+	 *
+	 *
+	 * @since     1.0.0
+	 *
+	 * @return    null    Return early if no settings page is registered.
+	 */
+	public function enqueue_admin_post_scripts() {
+		global $post, $wp_locale;
+		
+
+		if ( ! isset( $post->post_type )) {
+			return;
+		}
+
+
 		
 		if ( $this->plugin->get_plugin_slug() == $post->post_type ) {
 			wp_enqueue_script( $this->plugin->get_plugin_slug() . '-post-type-script', plugins_url( 'assets/js/post.js', __FILE__ ), array( 'jquery','jquery-ui-core','jquery-ui-position','jquery-ui-datepicker' ), Super_Simple_Events::VERSION );
@@ -247,7 +294,7 @@ class Super_Simple_Events_Admin {
 		        // get the start of week from WP general setting
 		        'firstDay'          => get_option( 'start_of_week' ),
 		        // is Right to left language? default is false
-		        'isRTL'             => (boolean)$wp_locale->is_rtl,
+		        'isRTL'             => (boolean)$wp_locale->is_rtl(),
 		    );
 		 
 		    // Pass the array to the enqueued JS
@@ -255,7 +302,6 @@ class Super_Simple_Events_Admin {
 		}
 
 	}
-
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
@@ -329,7 +375,7 @@ class Super_Simple_Events_Admin {
             array($this,'inner_custom_box'),
             $this->plugin->get_plugin_slug(),
             'advanced',
-            'high'
+			'high'
         );
 	}
 	
@@ -351,6 +397,9 @@ class Super_Simple_Events_Admin {
 	  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
 	      return $post_id;
 	
+	  if(!isset($_POST['post_type']))
+		  return $post_id;
+
 	  // Check the user's permissions.
 	  if ( $this->plugin->get_plugin_slug() != $_POST['post_type'] ) {
 	
@@ -360,17 +409,18 @@ class Super_Simple_Events_Admin {
 	  $list = $this->list_inputs();
 	  
 	  
-	  $start_date = $_POST['start_date_alt'];
-	  $end_date = $_POST['end_date_alt'];
-	  $start_date_unix = strtotime($start_date);
-	  $end_date_unix = strtotime($end_date);
-	  if($start_date > $end_date){
-		  $_POST['end_date-alt'] = $_POST['start_date_alt'];
-		  $_POST['end_date'] = $_POST['start_date'];
-		  $end_date = $_POST['end_date_alt'];
-	  }
+	  $start_date = $_POST['sse_start_date_alt'];
+	  $end_date = $_POST['sse_end_date_alt'];
 	  
-	  $between_dates = $this->dateRange($_POST['start_date-alt'],$_POST['end_date-alt']);
+	  if($start_date > $end_date){
+		  $_POST['sse_end_date_alt'] = $_POST['sse_start_date_alt'];
+		  $_POST['sse_end_date'] = $_POST['sse_start_date'];
+		  $end_date = $_POST['sse_end_date_alt'];
+	  }
+	  $start_date_unix = strtotime($start_date);
+	  $end_date_unix = strtotime($end_date);	  
+
+	  $between_dates = $this->dateRange($start_date,$end_date);
 	  $key = 'between_dates';
 	  delete_post_meta( $post_id, $key);
 	  
@@ -419,12 +469,12 @@ class Super_Simple_Events_Admin {
 	
 	public function list_inputs(){
 		$list = array(
-					 array('key' => 'start_date', 'label' => 'Start date', 'type' => 'date'),
-					 array('key' => 'end_date', 'label' => 'End date', 'type' => 'date'),
-					 array('key' => 'time', 'label' => 'Time', 'type' => 'text'),
-					 array('key' => 'start_date_alt', 'label' => 'Start date', 'type' => 'hidden'),
-					 array('key' => 'end_date_alt', 'label' => 'End date', 'type' => 'hidden'),
-					 array('key' => 'location', 'label' => 'Location', 'type' => 'text')
+					 array('key' => 'sse_start_date', 'label' => 'Start date', 'type' => 'date'),
+					 array('key' => 'sse_end_date', 'label' => 'End date', 'type' => 'date'),
+					 array('key' => 'sse_time', 'label' => 'Time', 'type' => 'text'),
+					 array('key' => 'sse_start_date_alt', 'label' => 'Start date', 'type' => 'hidden'),
+					 array('key' => 'sse_end_date_alt', 'label' => 'End date', 'type' => 'hidden'),
+					 array('key' => 'sse_location', 'label' => 'Location', 'type' => 'text')
 				);
 		return $list;
 	}

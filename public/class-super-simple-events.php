@@ -543,7 +543,7 @@ class Super_Simple_Events {
 	 * @since    1.0.0
 	 * @return   array $new_vars
 	 */
-	protected function query_vars($vars){
+	public function query_vars($vars){
 		//print_r($vars);
 		//print_r(wp_parse_args($this->query_vars, $vars));
 		return wp_parse_args($this->query_vars, $vars);
@@ -554,13 +554,13 @@ class Super_Simple_Events {
 	 * 
 	 * @since    1.0.0
 	 */
-	protected function add_rewrite_rule(){
+	public function add_rewrite_rule(){
 		$count = 1;
 		$query = "";
 		$rule = "index.php?post_type=".$this->get_plugin_slug();
 		foreach($this->query_vars as $var){
 			$query .= "([^/]+)/";
-			$final_query = $this->get_option($key)."/".$query."?";
+			$final_query = $this->get_option('post_type_slug')."/".$query."?";
 			$rule  .= '&'.$var.'=$matches['.$count.']';
 			add_rewrite_rule($final_query, $rule);  
 			$count++;
@@ -576,7 +576,7 @@ class Super_Simple_Events {
      * @author   Jonathan Harris <jon@spacedmonkey.co.uk>
 	 * @param object $query
 	 */
-	protected function pre_get_posts($query){
+	public function pre_get_posts($query){
 		if($query->is_post_type_archive($this->get_plugin_slug()) && $query->is_main_query() ){
 			
 			$this_year = get_query_var('sse_year');
@@ -629,11 +629,42 @@ class Super_Simple_Events {
 	 * 
 	 * @param string $content
 	 */
-	protected function the_content($content){
+	public function the_content($content){
 		global $post;
+
+		$new_content = $content;
 		if($post->post_type == $this->get_plugin_slug()){
-			$content .= "Testing";
+			$time = $date = $location = "";
+			
+			$date_format = "d M Y";
+			
+
+			$start_date_post = get_post_meta($post->ID,'sse_start_date_alt',true);
+			if(!empty($start_date_post)){
+				$display_date = '<span class="dtstart">'.date($date_format, strtotime($start_date_post)).'</span>';
+				$end_date_post = get_post_meta($post->ID,'sse_end_date_alt',true);
+				if($start_date_post != $end_date_post){
+					$display_date .= ' - <span class="dtend">' .date($date_format, strtotime($end_date_post)).'</span>';
+				}
+				$date = sprintf(__('<span class="sse-section"><span class="dashicons dashicons-calendar"></span> %s</span>&nbsp;&nbsp;&nbsp;', $this->get_plugin_slug()), $display_date);
+			}
+
+			$time_post = get_post_meta($post->ID,'sse_time',true);
+			if(!empty($time_post)){
+				$time = sprintf(__('<span class="sse-section"><span class="dashicons dashicons-clock"></span> %s</span>&nbsp;&nbsp;&nbsp;', $this->get_plugin_slug()), $time_post);
+			}
+
+			$location_post = get_post_meta($post->ID,'sse_location',true);
+			if(!empty($location_post)){
+				$location = sprintf(__('<span class="sse-section"><span class="dashicons dashicons-location-alt"></span> <span class="location">%s</span></span>&nbsp', $this->get_plugin_slug()), $location_post);
+			}
+
+			
+			
+			$meta = sprintf(__('<div class="sse-meta">%1$s%2$s%3$s</div>', $this->get_plugin_slug()),$time, $date, $location );
+			
+			$new_content = $meta . $content;
 		}
-		return $content;
+		return $new_content;
 	}
 }
