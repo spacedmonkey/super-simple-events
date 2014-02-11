@@ -14,6 +14,15 @@ Super simple events
 
 Super simple events is a plugins
 
+Features include:
+
+* Add events, set start / end dates, time and location. 
+* Show event date before content in front end. 
+* Assign event into event types
+* Hide past events 
+* Widget to show upcoming events
+* Admin panel to configure settings 
+
 == Installation ==
 
 This section describes how to install the plugin and get it working.
@@ -49,6 +58,3 @@ e.g.
 
 An answer to that question.
 
-= What about foo bar? =
-
-Answer to foo bar dilemma.

@@ -3,6 +3,15 @@ Super Simple Events
 
 Super Simple Events WordPress Plugin. This plugin is currently in development, please do not use.
 
+Features include:
+
+* Add events, set start / end dates, time and location. 
+* Show event date before content in front end. 
+* Assign event into event types
+* Hide past events 
+* Widget to show upcoming events
+* Admin panel to configure settings 
+
 ## Installation
 
 This section describes how to install the plugin and get it working.
@@ -33,25 +42,6 @@ This section describes how to install the plugin and get it working.
 ## GitHub Updater
 
 The Super Simple Events includes native support for the [GitHub Updater](https://github.com/afragen/github-updater) which allows you to provide updates to your WordPress plugin from GitHub.
-
-This uses a new tag in the plugin header:
-
->  `* GitHub Plugin URI: https://github.com/<owner>/<repo>`
-
-Here's how to take advantage of this feature:
-
-1. Install the [GitHub Updater](https://github.com/afragen/github-updater)
-2. Replace `<owner>` with your username and `<repo>` with the repository of your plugin
-3. Push commits to the master branch
-4. Enjoy your plugin being updated in the WordPress dashboard
-
-The current version of the GitHub Updater supports tags/branches - whichever has the highest number.
-
-To specify a branch that you would like to use for updating, just add a `GitHub Branch:` header. GitHub Updater will preferentially use a tag over a branch having the same or lesser version number. If the version number of the specified branch is greater then the update will pull from the branch and not from the tag.
-
-The default state is either `GitHub Branch: master` or nothing at all. They are equivalent.
-
-All that info is in [the project](https://github.com/afragen/github-updater).
 
 ## License
 
