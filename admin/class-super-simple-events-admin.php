@@ -469,12 +469,12 @@ class Super_Simple_Events_Admin {
 	
 	public function list_inputs(){
 		$list = array(
-					 array('key' => 'sse_start_date', 'label' => 'Start date', 'type' => 'date'),
-					 array('key' => 'sse_end_date', 'label' => 'End date', 'type' => 'date'),
-					 array('key' => 'sse_time', 'label' => 'Time', 'type' => 'text'),
-					 array('key' => 'sse_start_date_alt', 'label' => 'Start date', 'type' => 'hidden'),
-					 array('key' => 'sse_end_date_alt', 'label' => 'End date', 'type' => 'hidden'),
-					 array('key' => 'sse_location', 'label' => 'Location', 'type' => 'text')
+					 array('key' => 'sse_start_date', 'label' => __('Start Date', $this->plugin->get_plugin_slug()), 'type' => 'date'),
+					 array('key' => 'sse_end_date', 'label' => __('End date', $this->plugin->get_plugin_slug()), 'type' => 'date'),
+					 array('key' => 'sse_time', 'label' => __('Time', $this->plugin->get_plugin_slug()), 'type' => 'text'),
+					 array('key' => 'sse_start_date_alt', 'label' => ' ', 'type' => 'hidden'),
+					 array('key' => 'sse_end_date_alt', 'label' => ' ', 'type' => 'hidden'),
+					 array('key' => 'sse_location', 'label' => __('Location', $this->plugin->get_plugin_slug()), 'type' => 'text')
 				);
 		return $list;
 	}
@@ -509,8 +509,7 @@ class Super_Simple_Events_Admin {
 		$value = get_post_meta( $post->ID, $key, true );
 		
         printf(
-            __('<p><labal for="%1$s">%2$s</label><br /><input type="text" id="%1$s" name="%1$s" value="%3$s" class="regular-text" /></p>', $this->plugin->get_plugin_slug()),
-            $key,
+            '<p><labal for="%1$s">%2$s</label><br /><input type="text" id="%1$s" name="%1$s" value="%3$s" class="regular-text" /></p>',
             $label,
             $value
         );
@@ -520,7 +519,7 @@ class Super_Simple_Events_Admin {
 		global $post;
 		$value = get_post_meta( $post->ID, $key, true );
         printf(
-            __('<p><labal for="%1$s">%2$s</label><br /><input type="text" class="add_date_picker" id="%1$s" name="%1$s" value="%3$s" /></p>', $this->plugin->get_plugin_slug()),
+            '<p><labal for="%1$s">%2$s</label><br /><input type="text" class="add_date_picker" id="%1$s" name="%1$s" value="%3$s" /></p>',
             $key,
             $label,
             $value
@@ -531,7 +530,7 @@ class Super_Simple_Events_Admin {
 		global $post;
 		$value = get_post_meta( $post->ID, $key, true );
         printf(
-            __('<input type="hidden" id="%1$s" name="%1$s" value="%2$s" />', $this->plugin->get_plugin_slug()),
+            '<input type="hidden" id="%1$s" name="%1$s" value="%2$s" />',
             $key,
             $value
         );
@@ -558,7 +557,7 @@ class Super_Simple_Events_Admin {
             //  Add a new section to a settings page.
             add_settings_section(
                 $this->plugin->setting_section_id, // ID
-                $this->plugin->plugin_name.' Settings', // Title
+                sprintf(__('%s Settings:', $this->plugin->get_plugin_slug()), $this->plugin->get_plugin_name()),
                 array( $this, 'print_section_info' ), // Callback
                 $this->plugin->get_plugin_slug() // Page
             );
@@ -566,7 +565,7 @@ class Super_Simple_Events_Admin {
             // Add the site id field to the section of the settings page
             add_settings_field(
                 'post_type_slug', // ID
-                'Post Type Slug', // Title
+                __('Post Type Slug',$this->plugin->get_plugin_slug()),
                 array( $this, 'settings_text' ), // Callback
                 $this->plugin->get_plugin_slug(), // Page
                 $this->plugin->setting_section_id, // Section,
@@ -576,7 +575,7 @@ class Super_Simple_Events_Admin {
             // Add the site name field to the section of the settings page
             add_settings_field(
                 'taxonomy_slug',
-                'Taxonomy slug',
+           		 __('Taxonomy slug',$this->plugin->get_plugin_slug()),
                 array( $this, 'settings_text' ),
                 $this->plugin->get_plugin_slug(),
                 $this->plugin->setting_section_id,
@@ -586,7 +585,7 @@ class Super_Simple_Events_Admin {
 			// Add the site name field to the section of the settings page
             add_settings_field(
                 'date_format',
-                'Display Date Format',
+            	__('Display Date Format',$this->plugin->get_plugin_slug()),
                 array( $this, 'settings_text' ),
                 $this->plugin->get_plugin_slug(),
                 $this->plugin->setting_section_id,
@@ -596,7 +595,7 @@ class Super_Simple_Events_Admin {
              // Add the site name field to the section of the settings page
             add_settings_field(
                 'roles_checkbox',
-                'Roles',
+            	__('Roles',$this->plugin->get_plugin_slug()),
                 array( $this, 'roles_checkbox' ),
                 $this->plugin->get_plugin_slug(),
                 $this->plugin->setting_section_id,
@@ -616,7 +615,7 @@ class Super_Simple_Events_Admin {
             // Add the site name field to the section of the settings page
             add_settings_field(
                 'display_meta',
-                'Display Meta',
+                __('Display Meta',$this->plugin->get_plugin_slug()),
                 array( $this, 'settings_checkbox' ),
                 $this->plugin->get_plugin_slug(),
                 $this->plugin->setting_section_id,
@@ -625,7 +624,7 @@ class Super_Simple_Events_Admin {
 
 			add_settings_field(
                 'hide_old_events',
-                'Hide Past Events',
+                __('Hide Past Events',$this->plugin->get_plugin_slug()),
                 array( $this, 'settings_checkbox' ),
                 $this->plugin->get_plugin_slug(),
                 $this->plugin->setting_section_id,
@@ -668,7 +667,7 @@ class Super_Simple_Events_Admin {
         {
 			$id = $args['id'];
             printf(
-                __('<input type="text" id="%s" name="%s[%s]" value="%s" />', $this->plugin->get_plugin_slug()),
+                '<input type="text" id="%s" name="%s[%s]" value="%s" />',
                 $id,
                 $this->plugin->option_name,
                 $id,
@@ -681,7 +680,7 @@ class Super_Simple_Events_Admin {
 			
 			$id = $args['id']; 
             printf(
-                __('<input type="checkbox" id="%s" name="%s[%s]" value="1" %s />', $this->plugin->get_plugin_slug()),
+                '<input type="checkbox" id="%s" name="%s[%s]" value="1" %s />',
                 $id,
                 $this->plugin->option_name,
                 $id,
@@ -698,7 +697,7 @@ class Super_Simple_Events_Admin {
 		   foreach($roles as $role_id => $name){
 		   	
 			   printf(
-	                __('<label for="%s"><input type="checkbox" id="%s" name="%s[%s][]" value="%s" %s/>%s</label><br />', $this->plugin->get_plugin_slug()),
+	                '<label for="%s"><input type="checkbox" id="%s" name="%s[%s][]" value="%s" %s/>%s</label><br />',
 	                $role_id,
 	                $role_id,
 	                $this->plugin->option_name,

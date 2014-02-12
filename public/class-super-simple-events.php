@@ -655,22 +655,23 @@ class Super_Simple_Events {
 				if($start_date_post != $end_date_post){
 					$display_date .= ' - <span class="dtend">' .date($date_format, strtotime($end_date_post)).'</span>';
 				}
-				$date = sprintf(__('<span class="sse-section"><span class="dashicons dashicons-calendar"></span> %s</span>&nbsp;&nbsp;&nbsp;', $this->get_plugin_slug()), $display_date);
+				$date = sprintf('<span class="sse-section"><span class="dashicons dashicons-calendar"></span> %s</span>&nbsp;&nbsp;&nbsp;', $display_date);
 			}
 
 			$time_post = get_post_meta($post->ID,'sse_time',true);
 			if(!empty($time_post)){
-				$time = sprintf(__('<span class="sse-section"><span class="dashicons dashicons-clock"></span> %s</span>&nbsp;&nbsp;&nbsp;', $this->get_plugin_slug()), $time_post);
+				$time = sprintf('<span class="sse-section"><span class="dashicons dashicons-clock"></span> %s</span>&nbsp;&nbsp;&nbsp;', $time_post);
 			}
 
 			$location_post = get_post_meta($post->ID,'sse_location',true);
 			if(!empty($location_post)){
-				$location = sprintf(__('<span class="sse-section"><span class="dashicons dashicons-location-alt"></span> <span class="location">%s</span></span>&nbsp', $this->get_plugin_slug()), $location_post);
+				$location = sprintf('<span class="sse-section"><span class="dashicons dashicons-location-alt"></span> <span class="location">%s</span></span>&nbsp', $location_post);
 			}
 
 			
 			
-			$meta = sprintf(__('<div class="sse-meta">%1$s%2$s%3$s</div>', $this->get_plugin_slug()),$time, $date, $location );
+			$meta = sprintf('<div class="sse-meta">%1$s%2$s%3$s</div>',$time, $date, $location );
+			$meta = apply_filters($this->get_plugin_slug()."_meta", $meta, $time, $date, $location);
 			$new_content = $meta . $content;
 		}
 		return $new_content;
