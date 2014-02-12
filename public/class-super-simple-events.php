@@ -481,7 +481,7 @@ class Super_Simple_Events {
 		);
 		
 		$args = array(
-			'label'               => __( 'super-simply-event', $this->get_plugin_slug() ),
+			'label'               => __( 'Events', $this->get_plugin_slug() ),
 			'description'         => __( 'Events information pages', $this->get_plugin_slug() ),
 			'labels'              => $labels,
 			'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'trackbacks', 'revisions', 'publicize', 'wpcom-markdown' ),

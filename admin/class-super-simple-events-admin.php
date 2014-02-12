@@ -565,7 +565,7 @@ class Super_Simple_Events_Admin {
             // Add the site id field to the section of the settings page
             add_settings_field(
                 'post_type_slug', // ID
-                __('Post Type Slug',$this->plugin->get_plugin_slug()),
+                __('Event Slug',$this->plugin->get_plugin_slug()),
                 array( $this, 'settings_text' ), // Callback
                 $this->plugin->get_plugin_slug(), // Page
                 $this->plugin->setting_section_id, // Section,
@@ -595,7 +595,7 @@ class Super_Simple_Events_Admin {
              // Add the site name field to the section of the settings page
             add_settings_field(
                 'roles_checkbox',
-            	__('Roles',$this->plugin->get_plugin_slug()),
+            	__('Access Roles',$this->plugin->get_plugin_slug()),
                 array( $this, 'roles_checkbox' ),
                 $this->plugin->get_plugin_slug(),
                 $this->plugin->setting_section_id,
@@ -615,7 +615,7 @@ class Super_Simple_Events_Admin {
             // Add the site name field to the section of the settings page
             add_settings_field(
                 'display_meta',
-                __('Display Meta',$this->plugin->get_plugin_slug()),
+                __('Display event data before content',$this->plugin->get_plugin_slug()),
                 array( $this, 'settings_checkbox' ),
                 $this->plugin->get_plugin_slug(),
                 $this->plugin->setting_section_id,
