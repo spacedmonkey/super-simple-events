@@ -79,6 +79,7 @@ class Super_Simple_Events_Admin {
 		// Events meta box
 		add_action('add_meta_boxes', array($this,'add_meta_boxes'), 1);
 		add_action( 'save_post', array($this,'save_post') );
+
 		
 		// Add column in event post list
 		add_action( 'manage_'.$this->plugin->get_plugin_slug().'_posts_custom_column' , array( $this, 'custom_columns'), 10, 2 );
