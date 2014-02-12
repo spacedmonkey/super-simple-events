@@ -1,31 +1,210 @@
-# Copyright (C) 2013 TODO
-# This file is distributed under the same license as the TODO package.
 msgid ""
 msgstr ""
-"Project-Id-Version: TODO 1.0.0\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/plugins/super-simple-events\n"
-"POT-Creation-Date: 2013-05-10 11:23:19+00:00\n"
-"PO-Revision-Date: 2013-05-10 10:37-0500\n"
-"Last-Translator: FULL NAME <email@example.com>\n"
-"Language-Team: LANGUAGE <translations@example.com >\n"
+"Project-Id-Version: Super Simple Events\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-12 00:03+0100\n"
+"PO-Revision-Date: 2014-02-12 00:04+0100\n"
+"Last-Translator: \n"
+"Language-Team: spacedmonkey <jon@spacedmonkey.co.uk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
-"X-Poedit-KeywordsList: __;_e;_n;_x;esc_html_e;esc_html__;esc_attr_e;"
-"esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2\n"
-"X-Poedit-Basepath: ../\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: /Users/jonny/Documents/workspace/Super Simple Events\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED KINGDOM\n"
+"X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: class-super-simple-events-admin.php:170
-msgid "Page Title"
+#: admin/class-super-simple-events-admin.php:284
+msgid "Done"
 msgstr ""
 
-#: class-super-simple-events-admin.php:171
-msgid "Menu Text"
+#: admin/class-super-simple-events-admin.php:285
+msgid "Today"
 msgstr ""
 
-#: class-super-simple-events-admin.php:197
+#: admin/class-super-simple-events-admin.php:288
+msgid "Show a different month"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:346
 msgid "Settings"
 msgstr ""
+
+#: admin/class-super-simple-events-admin.php:365
+#, php-format
+msgid "The plugin %s requires Wordpress 3.8"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:374
+msgid "Event settings"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:512
+#, php-format
+msgid "<p><labal for=\"%1$s\">%2$s</label><br /><input type=\"text\" id=\"%1$s\" name=\"%1$s\" value=\"%3$s\" class=\"regular-text\" /></p>"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:523
+#, php-format
+msgid "<p><labal for=\"%1$s\">%2$s</label><br /><input type=\"text\" class=\"add_date_picker\" id=\"%1$s\" name=\"%1$s\" value=\"%3$s\" /></p>"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:534
+#, php-format
+msgid "<input type=\"hidden\" id=\"%1$s\" name=\"%1$s\" value=\"%2$s\" />"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:663
+#, php-format
+msgid "Set the configuration options for the %s Plugin:"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:671
+#, php-format
+msgid "<input type=\"text\" id=\"%s\" name=\"%s[%s]\" value=\"%s\" />"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:684
+#, php-format
+msgid "<input type=\"checkbox\" id=\"%s\" name=\"%s[%s]\" value=\"1\" %s />"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:701
+#, php-format
+msgid "<label for=\"%s\"><input type=\"checkbox\" id=\"%s\" name=\"%s[%s][]\" value=\"%s\" %s/>%s</label><br />"
+msgstr ""
+
+#: public/class-super-simple-events.php:144
+msgid "Super Simple Events"
+msgstr ""
+
+#: public/class-super-simple-events.php:461
+msgid "Events"
+msgstr ""
+
+#: public/class-super-simple-events.php:462
+msgid "Parent Event:"
+msgstr ""
+
+#: public/class-super-simple-events.php:463
+msgid "All Events"
+msgstr ""
+
+#: public/class-super-simple-events.php:464
+msgid "View Event"
+msgstr ""
+
+#: public/class-super-simple-events.php:465
+msgid "Add New Event"
+msgstr ""
+
+#: public/class-super-simple-events.php:466
+msgid "New Event"
+msgstr ""
+
+#: public/class-super-simple-events.php:467
+msgid "Edit Event"
+msgstr ""
+
+#: public/class-super-simple-events.php:468
+msgid "Update Event"
+msgstr ""
+
+#: public/class-super-simple-events.php:469
+msgid "Search events"
+msgstr ""
+
+#: public/class-super-simple-events.php:470
+msgid "No events found"
+msgstr ""
+
+#: public/class-super-simple-events.php:471
+msgid "No events found in Trash"
+msgstr ""
+
+#: public/class-super-simple-events.php:484
+msgid "super-simply-event"
+msgstr ""
+
+#: public/class-super-simple-events.php:485
+msgid "Events information pages"
+msgstr ""
+
+#: public/class-super-simple-events.php:517
+msgid "Search Event Types"
+msgstr ""
+
+#: public/class-super-simple-events.php:518
+msgid "All Event Types"
+msgstr ""
+
+#: public/class-super-simple-events.php:519
+msgid "Parent Event Type"
+msgstr ""
+
+#: public/class-super-simple-events.php:520
+msgid "Parent Event Type:"
+msgstr ""
+
+#: public/class-super-simple-events.php:521
+msgid "Edit Event Type"
+msgstr ""
+
+#: public/class-super-simple-events.php:522
+msgid "Update Event Type"
+msgstr ""
+
+#: public/class-super-simple-events.php:523
+msgid "Add New Event Type"
+msgstr ""
+
+#: public/class-super-simple-events.php:524
+msgid "New Event Type Name"
+msgstr ""
+
+#: public/class-super-simple-events.php:525
+msgid "Event Type"
+msgstr ""
+
+#: public/class-super-simple-events.php:658
+#, php-format
+msgid "<span class=\"sse-section\"><span class=\"dashicons dashicons-calendar\"></span> %s</span>&nbsp;&nbsp;&nbsp;"
+msgstr ""
+
+#: public/class-super-simple-events.php:663
+#, php-format
+msgid "<span class=\"sse-section\"><span class=\"dashicons dashicons-clock\"></span> %s</span>&nbsp;&nbsp;&nbsp;"
+msgstr ""
+
+#: public/class-super-simple-events.php:668
+#, php-format
+msgid "<span class=\"sse-section\"><span class=\"dashicons dashicons-location-alt\"></span> <span class=\"location\">%s</span></span>&nbsp"
+msgstr ""
+
+#: public/class-super-simple-events.php:673
+#, php-format
+msgid "<div class=\"sse-meta\">%1$s%2$s%3$s</div>"
+msgstr ""
+
+#: widget/class-super-simple-events-widget.php:62
+msgid "Short description of the widget goes here."
+msgstr ""
+
+#: widget/class-super-simple-events-widget.php:113
+msgid "Upcoming Events"
+msgstr ""
+
+#: widget/views/admin.php:6
+msgid "Title:"
+msgstr ""
+
+#: widget/views/admin.php:9
+msgid "Number of events to show:"
+msgstr ""
+
+#: widget/views/widget.php:16
+msgid "No upcoming events"
+msgstr ""
+
