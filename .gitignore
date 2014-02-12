@@ -13,3 +13,7 @@ wp-content/backups/
 sitemap.xml.gz
 
 .project
+
+.buildpath
+
+.settings/org.eclipse.php.core.prefs

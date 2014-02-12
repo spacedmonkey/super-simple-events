@@ -10,11 +10,8 @@
  */
 
 /**
- * Plugin class. This class should ideally be used to work with the
- * administrative side of the WordPress site.
- *
- * If you're interested in introducing public-facing
- * functionality, then refer to `class-super-simple-events.php`
+ * Admin Class. This is where admin panels are registered, 
+ * as is all the post meta boxes
  *
  *
  * @package Super_Simple_Events_Admin
@@ -74,22 +71,20 @@ class Super_Simple_Events_Admin {
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
-		
 
 		// Add an action link pointing to the options page.
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin->get_plugin_slug() . '.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
-
+		// Events meta box
 		add_action('add_meta_boxes', array($this,'add_meta_boxes'), 1);
 		add_action( 'save_post', array($this,'save_post') );
-		/*
-		 * Define custom functionality.
-		 *
-		 * Read more about actions and filters:
-		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
 		
+		// Add column in event post list
+		add_action( 'manage_'.$this->plugin->get_plugin_slug().'_posts_custom_column' , array( $this, 'custom_columns'), 10, 2 );
+		add_filter( 'manage_edit-'.$this->plugin->get_plugin_slug().'_columns' , array( $this, 'add_column') );
+		
+		// Display upgrade messages
 		if(!$this->plugin->is_higher_38())
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 
@@ -140,7 +135,7 @@ class Super_Simple_Events_Admin {
 			
 	}
 
-/**
+	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
 	 *
@@ -164,6 +159,11 @@ class Super_Simple_Events_Admin {
 		}
 	}
 	
+	/**
+	 * @since     1.0.0
+	 * 
+	 * @param Array $ArrayToStrip
+	 */
 	public function strip_array_indices( $ArrayToStrip ) {
 	    foreach( $ArrayToStrip as $objArrayItem) {
 	        $NewArray[] =  $objArrayItem;
@@ -171,6 +171,12 @@ class Super_Simple_Events_Admin {
 	 
 	    return( $NewArray );
 	}
+	
+	/**
+	 * @since     1.0.0
+	 * 
+	 * @param string $php_format
+	 */
 	public function date_format_php_to_js( $php_format ) {
 
 	    $SYMBOLS_MATCHING = array(
@@ -256,9 +262,6 @@ class Super_Simple_Events_Admin {
 	
 
 	}
-
-
-
 	
 	/**
 	 * Register and enqueue admin-specific JavaScript.
@@ -351,11 +354,7 @@ class Super_Simple_Events_Admin {
 	}
 
 	/**
-	 * NOTE:     Actions are points in the execution of a page or process
-	 *           lifecycle that WordPress fires.
-	 *
-	 *           Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
+	 * Add upgrade message
 	 *
 	 * @since    1.0.0
 	 */
@@ -366,8 +365,44 @@ class Super_Simple_Events_Admin {
 	    </div>
     <?php
 	}
-
-
+	
+	/**
+	 * Add Column to array 
+	 * 
+	 * @author   Jonathan Harris
+	 * @since    1.0.0
+	 */
+	public function add_column( $columns ) {
+	    return array_merge( $columns, 
+	        array( 'sse_date' => __( 'Event Date', $this->plugin->get_plugin_slug() ) ) );
+	}
+	
+	/**
+	 * Add column return value
+	 * 
+	 * @author   Jonathan Harris
+	 * @since    1.0.0
+	 * @param 	 String $column
+	 * @param 	 int $post_id
+	 */
+	public function custom_columns( $column, $post_id ) {
+	    switch ( $column ) {
+			case 'sse_date' :
+		    $date = get_post_meta($post_id, 'sse_start_date_alt', true);
+	        if ( !empty( $date ) )
+			    echo date($this->plugin->get_option('date_format'),strtotime($date));
+			else
+			    _e( 'No Date Set', $this->plugin->get_plugin_slug() );
+			break;
+	    }
+	}
+	
+	/**
+	 * Add meta box to post type
+	 * 
+	 * @author   Jonathan Harris
+	 * @since    1.0.0
+	 */
 	public function add_meta_boxes(){
 		add_meta_box(
             $this->plugin->get_plugin_slug().'_sectionid',
@@ -444,7 +479,7 @@ class Super_Simple_Events_Admin {
 	}
 	
 	/**
-	 * creating between two date
+	 * Creating between two date
 	 * @param string since
 	 * @param string until
 	 * @param string step
@@ -466,7 +501,11 @@ class Super_Simple_Events_Admin {
 	
 	    return $dates;
 	}
-	
+	/**
+	 * List of inputs to display on in events meta box. 
+	 * 
+	 * @return array $list
+	 */
 	public function list_inputs(){
 		$list = array(
 					 array('key' => 'sse_start_date', 'label' => __('Start Date', $this->plugin->get_plugin_slug()), 'type' => 'date'),
@@ -479,6 +518,10 @@ class Super_Simple_Events_Admin {
 		return $list;
 	}
 	
+	/**
+	 * 
+	 * Diplsay function for meta box
+	 */
 	public function inner_custom_box(){
 		
 		$list = $this->list_inputs();
@@ -488,6 +531,13 @@ class Super_Simple_Events_Admin {
 		}
 	}
 	
+	/**
+	 * Generate html markup for inputs 
+	 *
+	 * @param string $type
+	 * @param string $label
+	 * @param string $key
+	 */
 	public function settings_post($type, $label, $key){
 		switch($type){
 			case 'date':
@@ -503,6 +553,12 @@ class Super_Simple_Events_Admin {
 		
 	}
 	
+	/**
+	 * HTML markup for text input
+	 * 
+	 * @param string $label
+	 * @param string $key
+	 */
 	public function settings_post_text($label, $key){
 		global $post;
 		
@@ -510,11 +566,18 @@ class Super_Simple_Events_Admin {
 		
         printf(
             '<p><labal for="%1$s">%2$s</label><br /><input type="text" id="%1$s" name="%1$s" value="%3$s" class="regular-text" /></p>',
-            $label,
+            $key,
+        	$label,
             $value
         );
     }
     
+    /**
+	 * HTML markup for date input
+	 * 
+	 * @param string $label
+	 * @param string $key
+	 */
     public function settings_post_date($label, $key){
 		global $post;
 		$value = get_post_meta( $post->ID, $key, true );
@@ -526,6 +589,12 @@ class Super_Simple_Events_Admin {
         );
     }
     
+    /**
+	 * HTML markup for hidden input
+	 * 
+	 * @param string $label
+	 * @param string $key
+	 */
     public function settings_post_hidden($key){
 		global $post;
 		$value = get_post_meta( $post->ID, $key, true );
@@ -562,7 +631,7 @@ class Super_Simple_Events_Admin {
                 $this->plugin->get_plugin_slug() // Page
             );
          
-            // Add the site id field to the section of the settings page
+            // Add the post_type_slug field to the section of the settings page
             add_settings_field(
                 'post_type_slug', // ID
                 __('Event Slug',$this->plugin->get_plugin_slug()),
@@ -572,7 +641,7 @@ class Super_Simple_Events_Admin {
                 array('id' => 'post_type_slug')
             );
             
-            // Add the site name field to the section of the settings page
+            // Add the taxonomy_slug field to the section of the settings page
             add_settings_field(
                 'taxonomy_slug',
            		 __('Taxonomy slug',$this->plugin->get_plugin_slug()),
@@ -582,7 +651,7 @@ class Super_Simple_Events_Admin {
                 array('id' => 'taxonomy_slug')
             );
 
-			// Add the site name field to the section of the settings page
+			// Add the date_format field to the section of the settings page
             add_settings_field(
                 'date_format',
             	__('Display Date Format',$this->plugin->get_plugin_slug()),
@@ -592,7 +661,7 @@ class Super_Simple_Events_Admin {
                 array('id' => 'date_format')
             );
             
-             // Add the site name field to the section of the settings page
+             // Add the roles_checkbox field to the section of the settings page
             add_settings_field(
                 'roles_checkbox',
             	__('Access Roles',$this->plugin->get_plugin_slug()),
@@ -612,7 +681,7 @@ class Super_Simple_Events_Admin {
                 array('id' => 'override_templete')
             );*/
             
-            // Add the site name field to the section of the settings page
+            // Add the display_meta field to the section of the settings page
             add_settings_field(
                 'display_meta',
                 __('Display event data before content',$this->plugin->get_plugin_slug()),
@@ -622,6 +691,7 @@ class Super_Simple_Events_Admin {
                 array('id' => 'display_meta')
             );
 
+            // Add the hide_old_events field to the section of the settings page
 			add_settings_field(
                 'hide_old_events',
                 __('Hide Past Events',$this->plugin->get_plugin_slug()),
@@ -662,7 +732,12 @@ class Super_Simple_Events_Admin {
             printf(__('Set the configuration options for the %s Plugin:', $this->plugin->get_plugin_slug()), $this->plugin->get_plugin_name());
         }
          
-        
+	   /**
+		 * HTML markup for text input
+		 * 
+		 * @param string $label
+		 * @param string $key
+		 */
         public function settings_text($args)
         {
 			$id = $args['id'];
@@ -675,6 +750,12 @@ class Super_Simple_Events_Admin {
             );
         }
         
+        /**
+		 * HTML markup for checkbox input
+		 * 
+		 * @param string $label
+		 * @param string $key
+		 */
         public function settings_checkbox($args)
         {
 			
@@ -688,7 +769,12 @@ class Super_Simple_Events_Admin {
             );
         }
          
-       
+       /**
+		 * List out the wp roles as checkboxs
+		 * 
+		 * @param string $label
+		 * @param string $key
+		 */
        public function roles_checkbox($args){
 	       global $wp_roles;
 	       $roles = $wp_roles->get_names();

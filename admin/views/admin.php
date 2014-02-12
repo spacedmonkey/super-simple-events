@@ -19,10 +19,9 @@
 
 	<form action="options.php" method="POST">
             <?php 
-            	
             	settings_fields( $this->plugin->option_group );   
                 do_settings_sections( $this->plugin->get_plugin_slug() );
 				submit_button(); 
 			?>
-        </form>
+    </form>
 </div>

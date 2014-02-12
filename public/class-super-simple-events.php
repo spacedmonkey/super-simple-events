@@ -10,7 +10,7 @@
  */
 
 /**
- * Plugin class. This class should ideally be used to work with the
+ * Plugin class. This class works with the
  * public-facing side of the WordPress site.
  *
  *
@@ -53,7 +53,7 @@ class Super_Simple_Events {
 	protected static $instance = null;
 
 	/**
-	 * Initialize the plugin by setting localization and loading public scripts
+	 * Initialize the plugin name by setting localization and loading public scripts
 	 * and styles.
 	 *
 	 * @since     1.0.0
@@ -61,8 +61,19 @@ class Super_Simple_Events {
 	
 	public $plugin_name;
 	
+	
+	/**
+	 * Initialize the post type
+	 *
+	 * @since     1.0.0
+	 */
 	protected $post_type;
 	
+	/**
+	 * Initialize the taxonomy
+	 *
+	 * @since     1.0.0
+	 */
 	protected $taxonomy;
 	
 	
@@ -139,6 +150,15 @@ class Super_Simple_Events {
      */
     protected $query_vars = array('sse_year','sse_month','sse_day');
 	
+   /**
+     * Meta key used by shortcode
+     *
+     * @since    1.0
+     *
+     * @var String
+     */
+    private $meta_key = '';
+    
 	private function __construct() {
 
 		$this->plugin_name = __('Super Simple Events', $this->get_plugin_slug());
@@ -168,10 +188,13 @@ class Super_Simple_Events {
 		// Filter posts
 		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
 
+		// Only display meta if set in admin
 		if($this->get_option('display_meta') === "1"){
 			add_filter( 'the_content', array( $this, 'the_content' ), 99, 1 );
 		}
-
+		
+		// Register the shortcodes
+		$this->register_shortcodes();
 	}
 
 	/**
@@ -196,6 +219,12 @@ class Super_Simple_Events {
 		return $this->plugin_name;
 	}
 	
+	/**
+	 * Set default values of admin panel
+	 * 
+	 * @since 1.0.0
+	 * @return array 
+	 */
 	public function get_default_options(){
 		$this->default_options = array(
 										'post_type_slug' => 'events', 
@@ -536,6 +565,115 @@ class Super_Simple_Events {
 	
 		$this->taxonomy = register_taxonomy( 'super-simply-event-type', array( $this->get_plugin_slug() ), $args );
 	}
+	/**
+	 * 
+	 * Get post meta, if post id not set get from global $post
+	 * 
+	 * @param String $key
+	 * @param int $post_id
+	 */
+	public function get_post_meta($key, $post_id = 0){
+		global $post;
+		
+		if($post_id == 0){
+			if(isset( $post )){
+				$post_id = $post->ID;
+			}else{
+				return '';
+			}
+		}
+
+		$returner = get_post_meta($post_id, $key, true);
+		
+		return $returner;
+	}
+	
+	/**
+	 * 
+	 * Convert a date to date format
+	 * 
+	 * @param string $date
+	 * @param string $format_date
+	 */
+	public function convert_date_to_format($date, $format_date = ''){
+		if($format_date == ''){
+			$format_date = $this->get_option('date_format');
+		}
+		
+		return date($format_date, strtotime($date));
+	}
+	
+	public function shortcode_content( $atts ) {
+	     extract( shortcode_atts( array(
+		      'date_format' => $this->get_option('date_format')
+	     ), $atts ) );
+	     
+	     $meta = $this->get_post_meta($this->meta_key);
+
+	     if(in_array($this->meta_key, array('sse_start_date_alt','sse_end_date_alt'))){
+	     	$returner = $this->convert_date_to_format($meta, $date_format);
+	     }else{
+	     	$returner = $meta;
+	     }
+	     
+	     return $returner;
+	}
+	
+	/**
+	 * Register Shortcode
+	 *
+	 * @since    1.0.0
+	 */
+	public function sse_start_date($attr){
+		$this->meta_key = 'sse_start_date_alt';
+		return $this->shortcode_content($attr);
+	}
+	
+	/**
+	 * Register Shortcode
+	 *
+	 * @since    1.0.0
+	 */
+	public function sse_end_date($attr){
+		$this->meta_key = 'sse_end_date_alt';
+		return $this->shortcode_content($attr);
+	}
+	
+	/**
+	 * Register Shortcode
+	 *
+	 * @since    1.0.0
+	 */
+	public function sse_location($attr){
+		$this->meta_key = 'sse_location';
+		return $this->shortcode_content($attr);
+	}
+	
+	/**
+	 * Register Shortcode
+	 *
+	 * @since    1.0.0
+	 */
+	public function sse_time($attr){
+		$this->meta_key = 'sse_time';
+		return $this->shortcode_content($attr);
+	}
+	
+	/**
+	 * 
+	 * Register list of shortcodes
+	 * 
+	 * @since 1.0.0
+	 */
+	public function register_shortcodes(){
+		$list = array(
+					'sse_start_date','sse_end_date', 'sse_location','sse_time'
+				);
+				
+		foreach($list as $shortcode){
+			add_shortcode( $shortcode, array( $this,  $shortcode) );
+		}
+	}
 	
 	/**
 	 * 
@@ -546,8 +684,7 @@ class Super_Simple_Events {
 	 * @return   array $new_vars
 	 */
 	public function query_vars($vars){
-		//print_r($vars);
-		//print_r(wp_parse_args($this->query_vars, $vars));
+		// TODO: Get this working in later version
 		return wp_parse_args($this->query_vars, $vars);
 	}
 	
@@ -557,6 +694,7 @@ class Super_Simple_Events {
 	 * @since    1.0.0
 	 */
 	public function add_rewrite_rule(){
+		// TODO: Get this working in later version
 		$count = 1;
 		$query = "";
 		$rule = "index.php?post_type=".$this->get_plugin_slug();
@@ -581,7 +719,7 @@ class Super_Simple_Events {
 	public function pre_get_posts($query){
 		if($query->is_post_type_archive($this->get_plugin_slug()) && $query->is_main_query() && !is_admin()){
 			$meta_query = $query->get('meta_query');
-
+			/*
 			$this_year = get_query_var('sse_year');
 			$this_month = get_query_var('sse_month');
 			$this_day = get_query_var('sse_day');
@@ -613,7 +751,7 @@ class Super_Simple_Events {
 				$start_date_unix = strtotime($start_date);
 				$end_date_unix   = strtotime($end_date);				
 				
-			}else{
+			}else{*/
 				if($this->get_option('hide_old_events') == "1"){
 					$meta_query[] = array(
 							'key' => 'between_dates',
@@ -622,7 +760,7 @@ class Super_Simple_Events {
 						);
 				}
 				
-			}
+			//}
 			$query->set('meta_query', $meta_query);
 			$query->set('orderby','meta_value');
 			$query->set('order','ASC');
@@ -645,25 +783,25 @@ class Super_Simple_Events {
 		if($post->post_type == $this->get_plugin_slug()){
 			$time = $date = $location = "";
 			
-			$date_format = $this->get_option('date_format');
-			
 
-			$start_date_post = get_post_meta($post->ID,'sse_start_date_alt',true);
+			$start_date_post = $this->get_post_meta('sse_start_date_alt',$post->ID); 
 			if(!empty($start_date_post)){
-				$display_date = '<span class="dtstart">'.date($date_format, strtotime($start_date_post)).'</span>';
-				$end_date_post = get_post_meta($post->ID,'sse_end_date_alt',true);
+				$display_date = '<span class="dtstart">'.$this->convert_date_to_format($start_date_post).'</span>';
+				$end_date_post = $this->get_post_meta('sse_end_date_alt', $post->ID);
 				if($start_date_post != $end_date_post){
-					$display_date .= ' - <span class="dtend">' .date($date_format, strtotime($end_date_post)).'</span>';
+					$display_date .= ' - <span class="dtend">' .$this->convert_date_to_format($end_date_post).'</span>';
 				}
 				$date = sprintf('<span class="sse-section"><span class="dashicons dashicons-calendar"></span> %s</span>&nbsp;&nbsp;&nbsp;', $display_date);
 			}
+			
+			
 
-			$time_post = get_post_meta($post->ID,'sse_time',true);
+			$time_post = $this->get_post_meta('sse_time',$post->ID);
 			if(!empty($time_post)){
 				$time = sprintf('<span class="sse-section"><span class="dashicons dashicons-clock"></span> %s</span>&nbsp;&nbsp;&nbsp;', $time_post);
 			}
 
-			$location_post = get_post_meta($post->ID,'sse_location',true);
+			$location_post = $this->get_post_meta('sse_location', $post->ID);
 			if(!empty($location_post)){
 				$location = sprintf('<span class="sse-section"><span class="dashicons dashicons-location-alt"></span> <span class="location">%s</span></span>&nbsp', $location_post);
 			}

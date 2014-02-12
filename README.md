@@ -1,7 +1,7 @@
 Super Simple Events
 ===================
 
-Super Simple Events WordPress Plugin. This plugin is currently in development, please do not use.
+Super Simple Events is an events plugin for WordPress, built to be easy to use and manage. 
 
 Features include:
 
@@ -11,6 +11,12 @@ Features include:
 * Hide past events 
 * Widget to show upcoming events
 * Admin panel to configure settings 
+* Shortcodes to display event meta
+
+It is built using the WordPress coding standards, is designed to be very lite weight on system resources.
+
+If you wish to follow the development of this plugin, view the code on the official plugin [website](http://www.jonathandavidharris.co.uk/scripts/super-simple-events/ "website") or follow me on twitter [@thespacedmonkey](https://twitter.com/thespacedmonkey)
+
 
 ## Installation
 
@@ -59,3 +65,14 @@ GNU General Public License for more details.
 > You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+
+## Contributions
+
+Anyone is welcome to contribute to Super Simple Events
+
+There are various ways you can contribute:
+
+* Raise an issue on GitHub.
+* Send us a Pull Request with your bug fixes and/or new features.
+* Provide feedback and suggestions on enhancements.

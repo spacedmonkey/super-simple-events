@@ -11,7 +11,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Super Simple Events
- * Plugin URI:        http://www.jonathandavidharris.co.uk/
+ * Plugin URI:        http://www.jonathandavidharris.co.uk/scripts/super-simple-events/
  * Description:       Super Simple Events
  * Version:           1.0.0
  * Author:            Jonathan Harris
@@ -34,7 +34,6 @@ if ( ! defined( 'WPINC' ) ) {
 
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-super-simple-events.php' );
 
-
 register_activation_hook( __FILE__, array( 'Super_Simple_Events', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'Super_Simple_Events', 'deactivate' ) );
 
@@ -43,6 +42,7 @@ add_action( 'plugins_loaded', array( 'Super_Simple_Events', 'get_instance' ) );
 /*----------------------------------------------------------------------------*
  * Widget Functionality
  *----------------------------------------------------------------------------*/
+
 require_once( plugin_dir_path( __FILE__ ) . 'widget/class-super-simple-events-widget.php' );
 
 add_action( 'widgets_init', create_function( '', 'register_widget("Super_Simple_Events_Widget");' ) );

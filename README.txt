@@ -1,18 +1,19 @@
 === Super Simple Events ===
+
 Contributors: spacedmonkey
 Donate link: http://www.jonathandavidharris.co.uk/
-Tags: events, custom post type
+Tags: events, custom post type, events list, widget
 Requires at least: 3.8
 Tested up to: 3.8
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Super simple events 
+Super Simple Events is an events plugin for WordPress, built to be easy to use and manage.
 
 == Description ==
 
-Super simple events is a plugins
+Super Simple Events is an events plugin for WordPress, built to be easy to use and manage. 
 
 Features include:
 
@@ -22,12 +23,16 @@ Features include:
 * Hide past events 
 * Widget to show upcoming events
 * Admin panel to configure settings 
+* Shortcodes to display event meta
+
+It is built using the WordPress coding standards, is designed to be very lite weight on system resources.
+
+If you wish to follow the development of this plugin, view the code on 
+[GitHub](https://github.com/spacedmonkey/super-simple-events/ "github") or the official plugin [website](http://www.jonathandavidharris.co.uk/scripts/super-simple-events/ "website").
 
 == Installation ==
 
 This section describes how to install the plugin and get it working.
-
-e.g.
 
 = Using The WordPress Dashboard =
 
@@ -54,7 +59,28 @@ e.g.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= I can't see the settings panel, where is it? =
 
-An answer to that question.
+The plugin requires admin account to change the settings for this plugin. Please contact administrator.
+
+= I do not wish to display the event meta before the post content? =
+
+There is a setting in the admin panel that will remove the event details inserted before content. 
+
+= Is there anyway of displaying event details within the content of the post? =
+
+Super simple events has a 4 shortcodes that can be inserted into content of post to display events details. These shortcodes are 
+[sse_start_date], [sse_end_date] , [sse_location], [sse_time]
+
+== Screenshots ==
+
+1. Screenshot of an event on the front end with WordPress's default theme
+2. Screenshot of list of events in admin panel. 
+3. Screenshot of admin settings
+
+== Changelog ==
+
+= 1.0 =
+* First Release
+
 
