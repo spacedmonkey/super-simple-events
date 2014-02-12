@@ -83,12 +83,11 @@ class Super_Simple_Events_Admin {
 
 		add_action('add_meta_boxes', array($this,'add_meta_boxes'), 1);
 		add_action( 'save_post', array($this,'save_post') );
-		/*
-		 * Define custom functionality.
-		 *
-		 * Read more about actions and filters:
-		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
+		
+		add_action( 'manage_'.$this->plugin->get_plugin_slug().'_posts_custom_column' , array( $this, 'custom_columns'), 10, 2 );
+
+
+		add_filter( 'manage_edit-'.$this->plugin->get_plugin_slug().'_columns' , array( $this, 'add_column') );
 		
 		if(!$this->plugin->is_higher_38())
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
@@ -366,7 +365,27 @@ class Super_Simple_Events_Admin {
 	    </div>
     <?php
 	}
-
+	
+	/**
+	 * @author   Jonathan Harris
+	 * @since    1.0.0
+	 */
+	public function add_column( $columns ) {
+	    return array_merge( $columns, 
+	        array( 'sse_date' => __( 'Event Date', $this->plugin->get_plugin_slug() ) ) );
+	}
+	
+	public function custom_columns( $column, $post_id ) {
+	    switch ( $column ) {
+			case 'sse_date' :
+		    $date = get_post_meta($post_id, 'sse_start_date_alt', true);
+	        if ( !empty( $date ) )
+			    echo date($this->plugin->get_option('date_format'),strtotime($date));
+			else
+			    _e( 'No Date Set', $this->plugin->get_plugin_slug() );
+			break;
+	    }
+	}
 
 	public function add_meta_boxes(){
 		add_meta_box(

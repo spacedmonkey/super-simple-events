@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Super Simple Events\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-12 00:59+0100\n"
-"PO-Revision-Date: 2014-02-12 01:00+0100\n"
+"POT-Creation-Date: 2014-02-12 01:25+0100\n"
+"PO-Revision-Date: 2014-02-12 01:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: spacedmonkey <jon@spacedmonkey.co.uk>\n"
 "MIME-Version: 1.0\n"
@@ -16,77 +16,85 @@ msgstr ""
 "X-Poedit-Country: UNITED KINGDOM\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-super-simple-events-admin.php:284
+#: admin/class-super-simple-events-admin.php:283
 msgid "Done"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:285
+#: admin/class-super-simple-events-admin.php:284
 msgid "Today"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:288
+#: admin/class-super-simple-events-admin.php:287
 msgid "Show a different month"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:346
+#: admin/class-super-simple-events-admin.php:345
 msgid "Settings"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:365
+#: admin/class-super-simple-events-admin.php:364
 #, php-format
 msgid "The plugin %s requires Wordpress 3.8"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:374
+#: admin/class-super-simple-events-admin.php:375
+msgid "Event Date"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:385
+msgid "No Date Set"
+msgstr ""
+
+#: admin/class-super-simple-events-admin.php:393
 msgid "Event settings"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:472
+#: admin/class-super-simple-events-admin.php:491
 msgid "Start Date"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:473
+#: admin/class-super-simple-events-admin.php:492
 msgid "End date"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:474
+#: admin/class-super-simple-events-admin.php:493
 msgid "Time"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:477
+#: admin/class-super-simple-events-admin.php:496
 msgid "Location"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:560
+#: admin/class-super-simple-events-admin.php:579
 #, php-format
 msgid "%s Settings:"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:568
+#: admin/class-super-simple-events-admin.php:587
 msgid "Event Slug"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:578
+#: admin/class-super-simple-events-admin.php:597
 msgid "Taxonomy slug"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:588
+#: admin/class-super-simple-events-admin.php:607
 msgid "Display Date Format"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:598
+#: admin/class-super-simple-events-admin.php:617
 msgid "Access Roles"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:618
+#: admin/class-super-simple-events-admin.php:637
 msgid "Display event data before content"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:627
+#: admin/class-super-simple-events-admin.php:646
 msgid "Hide Past Events"
 msgstr ""
 
-#: admin/class-super-simple-events-admin.php:662
+#: admin/class-super-simple-events-admin.php:681
 #, php-format
 msgid "Set the configuration options for the %s Plugin:"
 msgstr ""
