@@ -59,7 +59,7 @@ class Super_Simple_Events_Widget extends WP_Widget {
 			sprintf(__( 'Upcoming Events (%s)', $this->plugin->get_plugin_slug() ), $this->plugin->get_plugin_name()),
 			array(
 				'classname'  => $this->plugin->get_plugin_slug().'-class',
-				'description' => sprintf(__( 'Display a list of upcoming events created in the %s plugin', $this->plugin->get_plugin_name()))
+				'description' => sprintf(__( 'Display a list of upcoming events created in the %s plugin', $this->plugin->get_plugin_slug()), $this->plugin->get_plugin_name())
 			)
 		);
 		$this->alt_option_name = 'widget_'.$this->plugin->get_plugin_slug();
