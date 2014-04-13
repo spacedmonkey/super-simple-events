@@ -4,7 +4,7 @@
  *
  * @package   Super_Simple_Events_Admin
  * @author    Jonathan Harris <jon@spacedmonkey.co.uk>
- * @license   GPL-2.0+
+ * @license   GPL-1.0.0+
  * @link      http://www.jonathandavidharris.co.uk/
  * @copyright 2014 Spacedmonkey
  */
@@ -80,7 +80,8 @@ class Super_Simple_Events_Admin {
 		add_action('add_meta_boxes', array($this,'add_meta_boxes'), 1);
 		add_action( 'save_post', array($this,'save_post') );
 
-		
+		add_action('update_option_'.$this->plugin->option_name, array($this, 'update_option_callback'), 10, 2);
+
 		// Add column in event post list
 		add_action( 'manage_'.$this->plugin->get_plugin_slug().'_posts_custom_column' , array( $this, 'custom_columns'), 10, 2 );
 		add_filter( 'manage_edit-'.$this->plugin->get_plugin_slug().'_columns' , array( $this, 'add_column') );
@@ -605,11 +606,26 @@ class Super_Simple_Events_Admin {
             $value
         );
     }
-	
+
+    /**
+     * When update post_type_slug or taxonomy_slug, flush rewrite rules
+     *
+     * @param $old_value
+     * @param $value
+     * @since 1.0.1
+     */
+    public function update_option_callback($old_value, $value){
+
+        if($old_value['post_type_slug'] != $value['post_type_slug'] || $old_value['taxonomy_slug'] != $value['taxonomy_slug']){
+            Super_Simple_Events::flush_rewrite_rules();
+        }
+
+    }
+
 	   /**
          * Register and add settings
          * @author  Jonathan Harris <jon@spacedmonkey.co.uk>
-         * @since    2.0
+         * @since    1.0.0
          */
         public function page_init()
         {
@@ -710,13 +726,13 @@ class Super_Simple_Events_Admin {
          *
          * @param array $input Contains all settings fields as array keys
          * @author  Jonathan Harris <jon@spacedmonkey.co.uk>
-         * @since    2.0
+         * @since    1.0.0
          */
         public function sanitize( $input )
         {
             $new_input = $input;
 
-            $new_input['override_templete'] = intval( $input['override_templete'] );
+           // $new_input['override_templete'] = intval( $input['override_templete'] );
 			$new_input['display_meta'] = isset( $input['display_meta'] ) ? $input['display_meta'] : 0;
             $new_input['hide_old_events'] = isset( $input['hide_old_events'] ) ? $input['hide_old_events'] : 0;
          
@@ -726,7 +742,7 @@ class Super_Simple_Events_Admin {
         /**
          * Print the Section text that is displayed before the settings
          * @author  Jonathan Harris <jon@spacedmonkey.co.uk>
-         * @since    2.0
+         * @since    1.0.0
          */
         public function print_section_info()
         {

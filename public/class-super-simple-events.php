@@ -26,7 +26,7 @@ class Super_Simple_Events {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 
 	/**
 	 *
@@ -378,16 +378,25 @@ class Super_Simple_Events {
 	 */
 	private static function single_activate() {
 		update_option( self::PLUGIN_SLUG . '-version', self::VERSION );
-		flush_rewrite_rules();
+        self::flush_rewrite_rules();
 	}
 
 	/**
-	 * Fired for each blog when the plugin is deactivated.
+	 * Flush url rewrites
 	 *
-	 * @since    1.0.0
+	 * @since    1.0.1
 	 */
 	private static function single_deactivate() {
 		update_option( self::PLUGIN_SLUG . '-version', 0 );
+		self::flush_rewrite_rules();
+	}
+	
+	/**
+	 * Fired for each blog when the plugin is deactivated.
+	 *
+	 * @since    1.0.1
+	 */
+	public static function flush_rewrite_rules(){
 		flush_rewrite_rules();
 	}
 

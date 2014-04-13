@@ -5,7 +5,7 @@ Donate link: http://www.jonathandavidharris.co.uk/
 Tags: events, custom post type, events list, widget
 Requires at least: 3.8
 Tested up to: 3.8
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,10 @@ There is a setting in the admin panel that will remove the event details inserte
 Super simple events has a 4 shortcodes that can be inserted into content of post to display events details. These shortcodes are 
 [sse_start_date], [sse_end_date] , [sse_location], [sse_time]
 
+= I am getting 404 pages when I go to a event page, how do I fix this? =
+
+This is an issue with WordPress code and registering custom post types. The url rewrite engine doesn't recognise the url. A work around is to go to Settings > permalinks and press save changes. Just by saving changes, it will flush the rewrite rules and events should display.
+
 == Screenshots ==
 
 1. Screenshot of an event on the front end with WordPress's default theme
@@ -80,7 +84,10 @@ Super simple events has a 4 shortcodes that can be inserted into content of post
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.1 =
+* Updated to plugin that stops people getting 404 pages when going to events pages.
+
+= 1.0.0 =
 * First Release
 
 
