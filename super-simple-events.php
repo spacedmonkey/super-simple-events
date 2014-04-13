@@ -13,7 +13,7 @@
  * Plugin Name:       Super Simple Events
  * Plugin URI:        http://www.jonathandavidharris.co.uk/scripts/super-simple-events/
  * Description:       Super Simple Events
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Jonathan Harris
  * Author URI:        http://www.jonathandavidharris.co.uk/
  * Text Domain:       super-simple-events-locale
