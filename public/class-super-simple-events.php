@@ -26,7 +26,7 @@ class Super_Simple_Events {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.1';
+	const VERSION = '1.0.2';
 
 	/**
 	 *
@@ -609,7 +609,7 @@ class Super_Simple_Events {
 			$format_date = $this->get_option('date_format');
 		}
 		
-		return date($format_date, strtotime($date));
+		return date_i18n($format_date, strtotime($date));
 	}
 	
 	public function shortcode_content( $atts ) {
@@ -726,7 +726,7 @@ class Super_Simple_Events {
 	 * @param object $query
 	 */
 	public function pre_get_posts($query){
-		if($query->is_post_type_archive($this->get_plugin_slug()) && $query->is_main_query() && !is_admin()){
+		if(($query->is_post_type_archive($this->get_plugin_slug()) || $query->is_tax('super-simply-event-type')) && $query->is_main_query() && !is_admin()){
 			$meta_query = $query->get('meta_query');
 			/*
 			$this_year = get_query_var('sse_year');
