@@ -17,3 +17,19 @@ sitemap.xml.gz
 .buildpath
 
 .settings/org.eclipse.php.core.prefs
+
+.idea/workspace.xml
+
+.idea/vcs.xml
+
+.idea/Super Simple Events.iml
+
+.idea/.name
+
+.idea/encodings.xml
+
+.idea/misc.xml
+
+.idea/modules.xml
+
+.idea/scopes/scope_settings.xml
