@@ -13,10 +13,10 @@
  * Plugin Name:       Super Simple Events
  * Plugin URI:        http://www.jonathandavidharris.co.uk/scripts/super-simple-events/
  * Description:       Super Simple Events
- * Version:           1.0.2
+ * Version:           1.0.4
  * Author:            Jonathan Harris
  * Author URI:        http://www.jonathandavidharris.co.uk/
- * Text Domain:       super-simple-events-locale
+ * Text Domain:       super-simple-events
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:       /languages
@@ -27,6 +27,8 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
+define('SSE_FILE',__FILE__);
 
 /*----------------------------------------------------------------------------*
  * Public-Facing Functionality

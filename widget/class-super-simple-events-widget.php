@@ -121,7 +121,7 @@ class Super_Simple_Events_Widget extends WP_Widget {
 			'meta_query' => array(
 							  array(
 								'key' => 'between_dates',
-								'value' => current_time( 'mysql'),
+								'value' => date( 'Y-m-d H:i:s', strtotime( '+1 days',current_time( 'timestamp'))),
 								'compare' => '>='
 						 	  )
 							)
@@ -166,7 +166,9 @@ class Super_Simple_Events_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 
-		$instance = $old_instance;
+		
+		$instance = wp_parse_args( $new_instance, $old_instance );
+		$this->flush_widget_cache();
 
 		return $instance;
 

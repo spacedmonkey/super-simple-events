@@ -26,7 +26,7 @@ class Super_Simple_Events {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.2';
+	const VERSION = '1.0.4';
 
 	/**
 	 *
@@ -409,8 +409,11 @@ class Super_Simple_Events {
 
 		$domain = self::PLUGIN_SLUG;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-
+	 
+		// wp-content/languages/plugin-name/plugin-name-de_DE.mo
 		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+		// wp-content/plugins/plugin-name/languages/plugin-name-de_DE.mo
+		load_plugin_textdomain( $domain, FALSE, basename( dirname( SSE_FILE ) ) . '/languages/' );
 
 	}
 
@@ -764,7 +767,7 @@ class Super_Simple_Events {
 				if($this->get_option('hide_old_events') == "1"){
 					$meta_query[] = array(
 							'key' => 'between_dates',
-							'value' => current_time( 'mysql'),
+							'value' => date( 'Y-m-d H:i:s', strtotime( '+1 days',current_time( 'timestamp'))),
 							'compare' => '>='
 						);
 				}
