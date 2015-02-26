@@ -17,3 +17,17 @@
 	</div>
 
 <?php endif; ?>
+
+
+<?php if (isset ( $instance['display_link'] ) && $instance['display_link'] == true ) : ?>
+
+	<?php
+		$class = '';
+		
+		if ( isset ( $instance['link_classes'] ) ) {
+			$class = 'class="' . $instance['link_classes'] . '"';
+		}
+	?>
+
+	<a href="<?php echo esc_url ( home_url( $this->plugin->options['post_type_slug'] . '/' ) ); ?>" <?php echo $class ?>>All events</a>
+<?php endif; ?>
