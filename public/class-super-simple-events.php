@@ -815,7 +815,7 @@ class Super_Simple_Events {
 
 			$location_post = $this->get_post_meta('sse_location', $post->ID);
 			if(!empty($location_post)){
-				$location = sprintf('<span class="sse-section"><span class="dashicons dashicons-location-alt"></span> <span class="location">%s</span></span>&nbsp', $location_post);
+				$location = sprintf('<span class="sse-section"><span class="dashicons dashicons-location-alt"></span> <span class="location">%s</span></span>&nbsp;', $location_post);
 			}
 
 			
