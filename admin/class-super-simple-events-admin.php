@@ -511,7 +511,7 @@ class Super_Simple_Events_Admin {
 	public function list_inputs(){
 		$list = array(
 					 array('key' => 'sse_start_date', 'label' => __('Start Date', $this->plugin->get_plugin_slug()), 'type' => 'date'),
-					 array('key' => 'sse_end_date', 'label' => __('End date', $this->plugin->get_plugin_slug()), 'type' => 'date'),
+					 array('key' => 'sse_end_date', 'label' => __('End Date', $this->plugin->get_plugin_slug()), 'type' => 'date'),
 					 array('key' => 'sse_time', 'label' => __('Time', $this->plugin->get_plugin_slug()), 'type' => 'text'),
 					 array('key' => 'sse_start_date_alt', 'label' => ' ', 'type' => 'hidden'),
 					 array('key' => 'sse_end_date_alt', 'label' => ' ', 'type' => 'hidden'),
