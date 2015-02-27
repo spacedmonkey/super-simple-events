@@ -411,7 +411,7 @@ class Super_Simple_Events_Admin {
             __( 'Event settings',  $this->plugin->get_plugin_slug()),
             array($this,'inner_custom_box'),
             $this->plugin->get_plugin_slug(),
-            'advanced',
+            'side',
 			'high'
         );
 	}
