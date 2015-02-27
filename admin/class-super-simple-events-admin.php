@@ -567,7 +567,7 @@ class Super_Simple_Events_Admin {
 		$value = get_post_meta( $post->ID, $key, true );
 		
         printf(
-            '<p><labal for="%1$s">%2$s</label><br /><input type="text" id="%1$s" name="%1$s" value="%3$s" class="regular-text" /></p>',
+            '<p><label for="%1$s">%2$s</label><br /><input type="text" id="%1$s" name="%1$s" value="%3$s" class="large-text" /></p>',
             $key,
         	$label,
             $value
@@ -584,7 +584,7 @@ class Super_Simple_Events_Admin {
 		global $post;
 		$value = get_post_meta( $post->ID, $key, true );
         printf(
-            '<p><labal for="%1$s">%2$s</label><br /><input type="text" class="add_date_picker" id="%1$s" name="%1$s" value="%3$s" /></p>',
+            '<p><label for="%1$s">%2$s</label><br /><input type="text" class="add_date_picker large-text" id="%1$s" name="%1$s" value="%3$s" /></p>',
             $key,
             $label,
             $value
