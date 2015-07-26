@@ -1,0 +1,226 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Super Simple Events\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-26 10:51+0200\n"
+"PO-Revision-Date: 2015-07-26 10:55+0200\n"
+"Last-Translator: Benoît Burgener\n"
+"Language-Team: spacedmonkey <jon@spacedmonkey.co.uk>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-super-simple-events-admin.php:289
+msgid "Done"
+msgstr "Terminé"
+
+#: admin/class-super-simple-events-admin.php:290
+msgid "Today"
+msgstr "Aujourd’hui"
+
+#: admin/class-super-simple-events-admin.php:293
+msgid "Show a different month"
+msgstr "Afficher un autre mois"
+
+#: admin/class-super-simple-events-admin.php:351
+msgid "Settings"
+msgstr "Paramètres"
+
+#: admin/class-super-simple-events-admin.php:366
+#, php-format
+msgid "The plugin %s requires Wordpress 3.8"
+msgstr "L’extension %s requiert WordPress 3.8"
+
+#: admin/class-super-simple-events-admin.php:379
+msgid "Event Date"
+msgstr "Date de l’événement"
+
+#: admin/class-super-simple-events-admin.php:397
+msgid "No Date Set"
+msgstr "Aucune date configurée"
+
+#: admin/class-super-simple-events-admin.php:411
+msgid "Event settings"
+msgstr "Paramètres de l’événement"
+
+#: admin/class-super-simple-events-admin.php:513
+msgid "Start Date"
+msgstr "Date de début"
+
+#: admin/class-super-simple-events-admin.php:514
+msgid "End date"
+msgstr "Date de fin"
+
+#: admin/class-super-simple-events-admin.php:515
+msgid "Time"
+msgstr "Heure"
+
+#: admin/class-super-simple-events-admin.php:518
+msgid "Location"
+msgstr "Lieu"
+
+#: admin/class-super-simple-events-admin.php:646
+#, php-format
+msgid "%s Settings:"
+msgstr "Paramètres de %s:"
+
+#: admin/class-super-simple-events-admin.php:654
+msgid "Event Slug"
+msgstr "Identifiant d’événement"
+
+#: admin/class-super-simple-events-admin.php:664
+msgid "Taxonomy slug"
+msgstr "Identifiant de catégorie"
+
+#: admin/class-super-simple-events-admin.php:674
+msgid "Display Date Format"
+msgstr "Format de date"
+
+#: admin/class-super-simple-events-admin.php:684
+msgid "Access Roles"
+msgstr "Niveaux d’accès"
+
+#: admin/class-super-simple-events-admin.php:704
+msgid "Display event data before content"
+msgstr "Afficher les informations de l’événement avant le contenu"
+
+#: admin/class-super-simple-events-admin.php:714
+msgid "Hide Past Events"
+msgstr "Masquer les événements passés"
+
+#: admin/class-super-simple-events-admin.php:749
+#, php-format
+msgid "Set the configuration options for the %s Plugin:"
+msgstr "Modifier la configuration pour l’extension %s:"
+
+#: public/class-super-simple-events.php:164
+msgid "Super Simple Events"
+msgstr "Super Simple Events"
+
+#: public/class-super-simple-events.php:500
+#: public/class-super-simple-events.php:502
+#: public/class-super-simple-events.php:525
+msgid "Events"
+msgstr "Événements"
+
+#: public/class-super-simple-events.php:501
+msgid "Event"
+msgstr "Événement"
+
+#: public/class-super-simple-events.php:503
+msgid "Parent Event:"
+msgstr "Événement parent:"
+
+#: public/class-super-simple-events.php:504
+msgid "All Events"
+msgstr "Tous les événements"
+
+#: public/class-super-simple-events.php:505
+msgid "View Event"
+msgstr "Voir l’événement"
+
+#: public/class-super-simple-events.php:506
+msgid "Add New Event"
+msgstr "Ajouter un nouvel événement"
+
+#: public/class-super-simple-events.php:507
+msgid "New Event"
+msgstr "Nouvel événement"
+
+#: public/class-super-simple-events.php:508
+msgid "Edit Event"
+msgstr "Modifier l’événement"
+
+#: public/class-super-simple-events.php:509
+msgid "Update Event"
+msgstr "Sauvegarder l’événement"
+
+#: public/class-super-simple-events.php:510
+msgid "Search events"
+msgstr "Rechercher parmi les événements"
+
+#: public/class-super-simple-events.php:511
+msgid "No events found"
+msgstr "Aucun événement trouvé"
+
+#: public/class-super-simple-events.php:512
+msgid "No events found in Trash"
+msgstr "Aucun événement trouvé dans la corbeille"
+
+#: public/class-super-simple-events.php:526
+msgid "Events information pages"
+msgstr "Page d’information sur les événements"
+
+#: public/class-super-simple-events.php:556
+msgid "Event Types"
+msgstr "Types d’événement"
+
+#: public/class-super-simple-events.php:557
+#: public/class-super-simple-events.php:566
+msgid "Event Type"
+msgstr "Type d’événement"
+
+#: public/class-super-simple-events.php:558
+msgid "Search Event Types"
+msgstr "Rechercher parmi les types d’événement"
+
+#: public/class-super-simple-events.php:559
+msgid "All Event Types"
+msgstr "Tous les types"
+
+#: public/class-super-simple-events.php:560
+msgid "Parent Event Type"
+msgstr "Type d’événement parent"
+
+#: public/class-super-simple-events.php:561
+msgid "Parent Event Type:"
+msgstr "Type d’événement parent:"
+
+#: public/class-super-simple-events.php:562
+msgid "Edit Event Type"
+msgstr "Modifier le type d’événement"
+
+#: public/class-super-simple-events.php:563
+msgid "Update Event Type"
+msgstr "Sauvegarder le type d’événement"
+
+#: public/class-super-simple-events.php:564
+msgid "Add New Event Type"
+msgstr "Ajouter une nouveau type d’événement"
+
+#: public/class-super-simple-events.php:565
+msgid "New Event Type Name"
+msgstr "Nouveau type d’événement"
+
+#: widget/class-super-simple-events-widget.php:59
+#, php-format
+msgid "Upcoming Events (%s)"
+msgstr "Événements à venir (%s)"
+
+#: widget/class-super-simple-events-widget.php:62
+#, php-format
+msgid "Display a list of upcoming events created in the %s plugin"
+msgstr "Affiche une liste d’événements à venir créés avec l’extensions %s"
+
+#: widget/class-super-simple-events-widget.php:113
+msgid "Upcoming Events"
+msgstr "Événement à venir"
+
+#: widget/views/admin.php:6
+msgid "Title:"
+msgstr "Titre:"
+
+#: widget/views/admin.php:9
+msgid "Number of events to show:"
+msgstr "Nombre d’événements à afficher"
+
+#: widget/views/widget.php:16
+msgid "No upcoming events"
+msgstr "Aucune événement à venir"
