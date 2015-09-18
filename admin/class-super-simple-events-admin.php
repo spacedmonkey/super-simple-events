@@ -10,7 +10,7 @@
  */
 
 /**
- * Admin Class. This is where admin panels are registered, 
+ * Admin Class. This is where admin panels are registered,
  * as is all the post meta boxes
  *
  *
@@ -43,14 +43,14 @@ class Super_Simple_Events_Admin {
 	 *
 	 * @since     1.0.0
 	 */
-	
+
 	protected $plugin = null;
-	
+
 	private function __construct() {
 
-		if( ! is_super_admin() ) {
+		if( ! is_admin() ) {
 			return;
-		} 
+		}
 
 		/*
 		 * Call $plugin_slug from public plugin class.
@@ -67,7 +67,7 @@ class Super_Simple_Events_Admin {
 
 		// Register settings
         add_action('admin_init', array($this, 'page_init'));
-        
+
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
@@ -85,7 +85,7 @@ class Super_Simple_Events_Admin {
 		// Add column in event post list
 		add_action( 'manage_'.$this->plugin->get_plugin_slug().'_posts_custom_column' , array( $this, 'custom_columns'), 10, 2 );
 		add_filter( 'manage_edit-'.$this->plugin->get_plugin_slug().'_columns' , array( $this, 'add_column') );
-		
+
 		// Display upgrade messages
 		if(!$this->plugin->is_higher_38())
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
@@ -101,7 +101,7 @@ class Super_Simple_Events_Admin {
 	 */
 	public static function get_instance() {
 
-		if( ! is_super_admin() ) {
+		if( ! is_admin() ) {
 			return;
 		}
 
@@ -123,8 +123,8 @@ class Super_Simple_Events_Admin {
 	 */
 	public function enqueue_admin_styles() {
 		global $post;
-		
-		
+
+
 		if ( ! isset( $this->plugin_screen_hook_suffix )) {
 			return;
 		}
@@ -133,8 +133,8 @@ class Super_Simple_Events_Admin {
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
 			wp_enqueue_style( $this->plugin->get_plugin_slug() .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Super_Simple_Events::VERSION );
 		}
-				
-			
+
+
 	}
 
 	/**
@@ -147,36 +147,36 @@ class Super_Simple_Events_Admin {
 	 */
 	public function enqueue_admin_post_styles() {
 		global $post;
-		
-		
+
+
 		if ( ! isset( $post->post_type )) {
 			return;
 		}
 
-				
+
 		if ( $this->plugin->get_plugin_slug() == $post->post_type ) {
 			wp_enqueue_style( $this->plugin->get_plugin_slug() .'-post-styles', plugins_url( 'assets/css/jquery-ui-1.10.4.custom.min.css', __FILE__ ), array(), Super_Simple_Events::VERSION );
-			
-			
+
+
 		}
 	}
-	
+
 	/**
 	 * @since     1.0.0
-	 * 
+	 *
 	 * @param Array $ArrayToStrip
 	 */
 	public function strip_array_indices( $ArrayToStrip ) {
 	    foreach( $ArrayToStrip as $objArrayItem) {
 	        $NewArray[] =  $objArrayItem;
 	    }
-	 
+
 	    return( $NewArray );
 	}
-	
+
 	/**
 	 * @since     1.0.0
-	 * 
+	 *
 	 * @param string $php_format
 	 */
 	public function date_format_php_to_js( $php_format ) {
@@ -239,7 +239,7 @@ class Super_Simple_Events_Admin {
 	    }
 	    return $jqueryui_format;
 	}
-	
+
 	/**
 	 * Register and enqueue admin-specific JavaScript.
 	 *
@@ -250,7 +250,7 @@ class Super_Simple_Events_Admin {
 	 */
 	public function enqueue_admin_scripts() {
 		global $post, $wp_locale;
-		
+
 
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
@@ -260,11 +260,11 @@ class Super_Simple_Events_Admin {
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
 			wp_enqueue_script( $this->plugin->get_plugin_slug() . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Super_Simple_Events::VERSION );
 		}
-		
-	
+
+
 
 	}
-	
+
 	/**
 	 * Register and enqueue admin-specific JavaScript.
 	 *
@@ -275,14 +275,14 @@ class Super_Simple_Events_Admin {
 	 */
 	public function enqueue_admin_post_scripts() {
 		global $post, $wp_locale;
-		
+
 
 		if ( ! isset( $post->post_type )) {
 			return;
 		}
 
 
-		
+
 		if ( $this->plugin->get_plugin_slug() == $post->post_type ) {
 			wp_enqueue_script( $this->plugin->get_plugin_slug() . '-post-type-script', plugins_url( 'assets/js/post.js', __FILE__ ), array( 'jquery','jquery-ui-core','jquery-ui-position','jquery-ui-datepicker' ), Super_Simple_Events::VERSION );
 			$aryArgs = array(
@@ -301,7 +301,7 @@ class Super_Simple_Events_Admin {
 		        // is Right to left language? default is false
 		        'isRTL'             => (boolean)$wp_locale->is_rtl(),
 		    );
-		 
+
 		    // Pass the array to the enqueued JS
 		    wp_localize_script( $this->plugin->get_plugin_slug() .'-post-type-script', 'datePickerOb', $aryArgs );
 		}
@@ -318,7 +318,7 @@ class Super_Simple_Events_Admin {
 		 * Add a settings page for this plugin to the Settings menu.
 		 *
 		 */
-		
+
 		$this->plugin_screen_hook_suffix = add_options_page(
 			__( $this->plugin->get_plugin_name(), $this->plugin->get_plugin_slug() ),
 			__( $this->plugin->get_plugin_name(), $this->plugin->get_plugin_slug() ),
@@ -367,21 +367,21 @@ class Super_Simple_Events_Admin {
 	    </div>
     <?php
 	}
-	
+
 	/**
-	 * Add Column to array 
-	 * 
+	 * Add Column to array
+	 *
 	 * @author   Jonathan Harris
 	 * @since    1.0.0
 	 */
 	public function add_column( $columns ) {
-	    return array_merge( $columns, 
+	    return array_merge( $columns,
 	        array( 'sse_date' => __( 'Event Date', $this->plugin->get_plugin_slug() ) ) );
 	}
-	
+
 	/**
 	 * Add column return value
-	 * 
+	 *
 	 * @author   Jonathan Harris
 	 * @since    1.0.0
 	 * @param 	 String $column
@@ -398,10 +398,10 @@ class Super_Simple_Events_Admin {
 			break;
 	    }
 	}
-	
+
 	/**
 	 * Add meta box to post type
-	 * 
+	 *
 	 * @author   Jonathan Harris
 	 * @since    1.0.0
 	 */
@@ -415,71 +415,71 @@ class Super_Simple_Events_Admin {
 			'high'
         );
 	}
-	
-	
+
+
 	/**
 	 * When the post is saved, saves our custom data.
 	 *
 	 * @param int $post_id The ID of the post being saved.
 	 */
 	function save_post( $post_id ) {
-	
+
 	  /*
 	   * We need to verify this came from the our screen and with proper authorization,
 	   * because save_post can be triggered at other times.
 	   */
-	
-	
+
+
 	  // If this is an autosave, our form has not been submitted, so we don't want to do anything.
-	  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
+	  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 	      return $post_id;
-	
+
 	  if(!isset($_POST['post_type']))
 		  return $post_id;
 
 	  // Check the user's permissions.
 	  if ( $this->plugin->get_plugin_slug() != $_POST['post_type'] ) {
-	
+
 	   	        return $post_id;
 	  }
-	
+
 	  $list = $this->list_inputs();
-	  
-	  
+
+
 	  $start_date = $_POST['sse_start_date_alt'];
 	  $end_date = $_POST['sse_end_date_alt'];
-	  
+
 	  if($start_date > $end_date){
 		  $_POST['sse_end_date_alt'] = $_POST['sse_start_date_alt'];
 		  $_POST['sse_end_date'] = $_POST['sse_start_date'];
 		  $end_date = $_POST['sse_end_date_alt'];
 	  }
 	  $start_date_unix = strtotime($start_date);
-	  $end_date_unix = strtotime($end_date);	  
+	  $end_date_unix = strtotime($end_date);
 
 	  $between_dates = $this->dateRange($start_date,$end_date);
 	  $key = 'between_dates';
 	  delete_post_meta( $post_id, $key);
-	  
+
 	  foreach($between_dates as $between_date){
 		  add_post_meta( $post_id, $key, $between_date );
 	  }
-	  
+
 	  foreach($list as $em){
-		  extract($em);			
+		  extract($em);
 		  // Sanitize user input.
 		  $mydata = sanitize_text_field( $_POST[$key] );
-		
+
 		  // Update the meta field in the database.
 		  update_post_meta( $post_id, $key, $mydata );
 
 	  }
-	  
-	  
+
+
 
 	  return $post_id;
 	}
-	
+
 	/**
 	 * Creating between two date
 	 * @param string since
@@ -489,23 +489,23 @@ class Super_Simple_Events_Admin {
 	 * @return array
 	 * @author Ali OYGUR <alioygur@gmail.com>
 	 */
-	public function dateRange($first, $last, $step = '+1 day', $format = 'Y-m-d' ) { 
-	
+	public function dateRange($first, $last, $step = '+1 day', $format = 'Y-m-d' ) {
+
 	    $dates = array();
 	    $current = strtotime($first);
 	    $last = strtotime($last);
-	
-	    while( $current <= $last ) { 
-	
+
+	    while( $current <= $last ) {
+
 	        $dates[] = date($format, $current);
 	        $current = strtotime($step, $current);
 	    }
-	
+
 	    return $dates;
 	}
 	/**
-	 * List of inputs to display on in events meta box. 
-	 * 
+	 * List of inputs to display on in events meta box.
+	 *
 	 * @return array $list
 	 */
 	public function list_inputs(){
@@ -519,22 +519,22 @@ class Super_Simple_Events_Admin {
 				);
 		return $list;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * Diplsay function for meta box
 	 */
 	public function inner_custom_box(){
-		
+
 		$list = $this->list_inputs();
 		foreach($list as $em){
 			extract($em);
 			$this->settings_post($type, $label, $key);
 		}
 	}
-	
+
 	/**
-	 * Generate html markup for inputs 
+	 * Generate html markup for inputs
 	 *
 	 * @param string $type
 	 * @param string $label
@@ -552,20 +552,20 @@ class Super_Simple_Events_Admin {
 				$this->settings_post_text($label, $key);
 				break;
 		}
-		
+
 	}
-	
+
 	/**
 	 * HTML markup for text input
-	 * 
+	 *
 	 * @param string $label
 	 * @param string $key
 	 */
 	public function settings_post_text($label, $key){
 		global $post;
-		
+
 		$value = get_post_meta( $post->ID, $key, true );
-		
+
         printf(
             '<p><label for="%1$s">%2$s</label><br /><input type="text" id="%1$s" name="%1$s" value="%3$s" class="large-text" /></p>',
             $key,
@@ -573,10 +573,10 @@ class Super_Simple_Events_Admin {
             $value
         );
     }
-    
+
     /**
 	 * HTML markup for date input
-	 * 
+	 *
 	 * @param string $label
 	 * @param string $key
 	 */
@@ -590,10 +590,10 @@ class Super_Simple_Events_Admin {
             $value
         );
     }
-    
+
     /**
 	 * HTML markup for hidden input
-	 * 
+	 *
 	 * @param string $label
 	 * @param string $key
 	 */
@@ -632,14 +632,14 @@ class Super_Simple_Events_Admin {
             if(!$this->plugin->option_group || !$this->plugin->option_name || !$this->plugin->setting_section_id){
                 return false;
             }
-            
+
             // Register a setting and its sanitization callback
             register_setting(
                 $this->plugin->option_group, // Option group
                 $this->plugin->option_name, // Option name
                 array( $this, 'sanitize' ) // Sanitize
             );
-             
+
             //  Add a new section to a settings page.
             add_settings_section(
                 $this->plugin->setting_section_id, // ID
@@ -647,7 +647,7 @@ class Super_Simple_Events_Admin {
                 array( $this, 'print_section_info' ), // Callback
                 $this->plugin->get_plugin_slug() // Page
             );
-         
+
             // Add the post_type_slug field to the section of the settings page
             add_settings_field(
                 'post_type_slug', // ID
@@ -657,7 +657,7 @@ class Super_Simple_Events_Admin {
                 $this->plugin->setting_section_id, // Section,
                 array('id' => 'post_type_slug')
             );
-            
+
             // Add the taxonomy_slug field to the section of the settings page
             add_settings_field(
                 'taxonomy_slug',
@@ -677,7 +677,7 @@ class Super_Simple_Events_Admin {
                 $this->plugin->setting_section_id,
                 array('id' => 'date_format')
             );
-            
+
              // Add the roles_checkbox field to the section of the settings page
             add_settings_field(
                 'roles_checkbox',
@@ -687,7 +687,7 @@ class Super_Simple_Events_Admin {
                 $this->plugin->setting_section_id,
                 array('id' => 'roles')
             );
-            
+
             // Add the site name field to the section of the settings page
           /*  add_settings_field(
                 'override_templete',
@@ -697,7 +697,7 @@ class Super_Simple_Events_Admin {
                 $this->plugin->setting_section_id,
                 array('id' => 'override_templete')
             );*/
-            
+
             // Add the display_meta field to the section of the settings page
             add_settings_field(
                 'display_meta',
@@ -717,10 +717,10 @@ class Super_Simple_Events_Admin {
                 $this->plugin->setting_section_id,
                 array('id' => 'hide_old_events')
             );
-            
+
 
         }
-         
+
         /**
          * Sanitize each setting field as needed
          *
@@ -735,10 +735,10 @@ class Super_Simple_Events_Admin {
            // $new_input['override_templete'] = intval( $input['override_templete'] );
 			$new_input['display_meta'] = isset( $input['display_meta'] ) ? $input['display_meta'] : 0;
             $new_input['hide_old_events'] = isset( $input['hide_old_events'] ) ? $input['hide_old_events'] : 0;
-         
+
             return $new_input;
         }
-         
+
         /**
          * Print the Section text that is displayed before the settings
          * @author  Jonathan Harris <jon@spacedmonkey.co.uk>
@@ -748,10 +748,10 @@ class Super_Simple_Events_Admin {
         {
             printf(__('Set the configuration options for the %s Plugin:', $this->plugin->get_plugin_slug()), $this->plugin->get_plugin_name());
         }
-         
+
 	   /**
 		 * HTML markup for text input
-		 * 
+		 *
 		 * @param string $label
 		 * @param string $key
 		 */
@@ -766,17 +766,17 @@ class Super_Simple_Events_Admin {
                 isset( $this->plugin->options[$id] ) ? esc_attr( $this->plugin->options[$id]) : ''
             );
         }
-        
+
         /**
 		 * HTML markup for checkbox input
-		 * 
+		 *
 		 * @param string $label
 		 * @param string $key
 		 */
         public function settings_checkbox($args)
         {
-			
-			$id = $args['id']; 
+
+			$id = $args['id'];
             printf(
                 '<input type="checkbox" id="%s" name="%s[%s]" value="1" %s />',
                 $id,
@@ -785,10 +785,10 @@ class Super_Simple_Events_Admin {
                 checked( !empty($this->plugin->options[$id]), "1" , false)
             );
         }
-         
+
        /**
 		 * List out the wp roles as checkboxs
-		 * 
+		 *
 		 * @param string $label
 		 * @param string $key
 		 */
@@ -798,7 +798,7 @@ class Super_Simple_Events_Admin {
 		   $id = $args['id'];
 
 		   foreach($roles as $role_id => $name){
-		   	
+
 			   printf(
 	                '<label for="%s"><input type="checkbox" id="%s" name="%s[%s][]" value="%s" %s/>%s</label><br />',
 	                $role_id,
@@ -810,7 +810,7 @@ class Super_Simple_Events_Admin {
 	                $name
 	            );
 		   }
-		   
+
        }
 
 }
