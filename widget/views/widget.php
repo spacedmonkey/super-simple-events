@@ -4,9 +4,9 @@
 <?php if($events->have_posts()):?>
 
 	<?php while ( $events->have_posts() ) : $events->the_post(); ?>
-		<div class="sse-widget-entry-title">
+		<p class="sse-widget-entry-title">
 			<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a>
-		</div>
+		</p>
 	<?php endwhile; ?>
 
 
@@ -23,7 +23,7 @@
 
 	<?php
 		$class = '';
-		
+
 		if ( isset ( $instance['link_classes'] ) ) {
 			$class = 'class="' . $instance['link_classes'] . '"';
 		}
