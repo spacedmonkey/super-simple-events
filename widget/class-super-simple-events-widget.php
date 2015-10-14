@@ -169,7 +169,9 @@ class Super_Simple_Events_Widget extends WP_Widget {
 		
 		$instance = wp_parse_args( $new_instance, $old_instance );
 		$this->flush_widget_cache();
-
+		
+		$instance['display_link'] = ( ! empty( $new_instance['display_link'] ) ) ? strip_tags( $new_instance['display_link'] ) : '';
+		
 		return $instance;
 
 	} // end widget

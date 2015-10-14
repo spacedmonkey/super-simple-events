@@ -3,3 +3,8 @@
 .sse-widget-entry-title{
 	margin: 0px 0px 1em;
 }
+
+.sse-widget-entry-title small{
+	display: block;
+	line-height: 80%;
+}
