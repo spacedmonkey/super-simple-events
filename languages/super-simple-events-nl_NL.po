@@ -1,0 +1,253 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Super Simple Events\n"
+"POT-Creation-Date: 2016-02-20 16:41+0100\n"
+"PO-Revision-Date: 2016-02-20 16:52+0100\n"
+"Last-Translator: Marcel van Doornen <marcel@webbouwplus.nl>\n"
+"Language-Team: Marcel van Doornen <marcel@webbouwplus.nl>\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: super-simple-events.php\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/class-super-simple-events-admin.php:289
+msgid "Done"
+msgstr "Gedaan"
+
+#: admin/class-super-simple-events-admin.php:290
+msgid "Today"
+msgstr "Vandaag"
+
+#: admin/class-super-simple-events-admin.php:293
+msgid "Show a different month"
+msgstr "Toon een andere maand"
+
+#: admin/class-super-simple-events-admin.php:351
+msgid "Settings"
+msgstr "Instellingen"
+
+#: admin/class-super-simple-events-admin.php:366
+#, php-format
+msgid "The plugin %s requires Wordpress 3.8"
+msgstr "Deze plugin %s vereist Wordpress 3.8"
+
+#: admin/class-super-simple-events-admin.php:379
+msgid "Event Date"
+msgstr "Evenement datum"
+
+#: admin/class-super-simple-events-admin.php:397
+msgid "No Date Set"
+msgstr "Geen datum ingevoerd"
+
+#: admin/class-super-simple-events-admin.php:411
+msgid "Event settings"
+msgstr "Evenement instellingen"
+
+#: admin/class-super-simple-events-admin.php:513
+msgid "Start Date"
+msgstr "Start datum"
+
+#: admin/class-super-simple-events-admin.php:514
+msgid "End date"
+msgstr "Eind datum"
+
+#: admin/class-super-simple-events-admin.php:515
+msgid "Time"
+msgstr "Tijd"
+
+#: admin/class-super-simple-events-admin.php:518
+msgid "Location"
+msgstr "Locatie"
+
+#: admin/class-super-simple-events-admin.php:646
+#, php-format
+msgid "%s Settings:"
+msgstr "%s Instellingen:"
+
+#: admin/class-super-simple-events-admin.php:654
+msgid "Event Slug"
+msgstr "Evenementen Slug"
+
+#: admin/class-super-simple-events-admin.php:664
+msgid "Taxonomy slug"
+msgstr "Taxonomy slug"
+
+#: admin/class-super-simple-events-admin.php:674
+msgid "Display Date Format"
+msgstr "Toon Datum Formaat"
+
+#: admin/class-super-simple-events-admin.php:684
+msgid "Access Roles"
+msgstr "Toegang voor rollen"
+
+#: admin/class-super-simple-events-admin.php:704
+msgid "Display event data before content"
+msgstr "Toon evenement datum voor content"
+
+#: admin/class-super-simple-events-admin.php:714
+msgid "Hide Past Events"
+msgstr "Verberg verlopen evenementen"
+
+#: admin/class-super-simple-events-admin.php:749
+#, php-format
+msgid "Set the configuration options for the %s Plugin:"
+msgstr "Pas de configuratie instellingen for de %s plugin toe."
+
+#. Plugin Name of the plugin/theme
+#. Description of the plugin/theme
+#: public/class-super-simple-events.php:164
+msgid "Super Simple Events"
+msgstr "Super Simple Events"
+
+#: public/class-super-simple-events.php:500
+msgctxt "Post Type General Name"
+msgid "Events"
+msgstr "Evenementen"
+
+#: public/class-super-simple-events.php:501
+msgctxt "Post Type Singular Name"
+msgid "Event"
+msgstr "Evenement"
+
+#: public/class-super-simple-events.php:502
+#: public/class-super-simple-events.php:525
+msgid "Events"
+msgstr "Evenementen"
+
+#: public/class-super-simple-events.php:503
+msgid "Parent Event:"
+msgstr "Hoger gelegen evenement:"
+
+#: public/class-super-simple-events.php:504
+msgid "All Events"
+msgstr "Alle evenementen"
+
+#: public/class-super-simple-events.php:505
+msgid "View Event"
+msgstr "Bekijk evenement"
+
+#: public/class-super-simple-events.php:506
+msgid "Add New Event"
+msgstr "Voeg een nieuw evenement toe"
+
+#: public/class-super-simple-events.php:507
+msgid "New Event"
+msgstr "Nieuw evenement"
+
+#: public/class-super-simple-events.php:508
+msgid "Edit Event"
+msgstr "Bewerk evenement"
+
+#: public/class-super-simple-events.php:509
+msgid "Update Event"
+msgstr "Evenement bijwerken"
+
+#: public/class-super-simple-events.php:510
+msgid "Search events"
+msgstr "Zoeke evenementen"
+
+#: public/class-super-simple-events.php:511
+msgid "No events found"
+msgstr "Geen evenementen gevonden"
+
+#: public/class-super-simple-events.php:512
+msgid "No events found in Trash"
+msgstr "Geen evenementen gevonden in de prullenbak"
+
+#: public/class-super-simple-events.php:526
+msgid "Events information pages"
+msgstr "Evenementen informatie pagina's"
+
+#: public/class-super-simple-events.php:556
+msgctxt "taxonomy general name"
+msgid "Event Types"
+msgstr "Evenement types"
+
+#: public/class-super-simple-events.php:557
+msgctxt "taxonomy singular name"
+msgid "Event Type"
+msgstr "Evenement types"
+
+#: public/class-super-simple-events.php:558
+msgid "Search Event Types"
+msgstr "Zoeken evenement types"
+
+#: public/class-super-simple-events.php:559
+msgid "All Event Types"
+msgstr "Alle evenement types"
+
+#: public/class-super-simple-events.php:560
+msgid "Parent Event Type"
+msgstr "Hoger gelegen evenement type"
+
+#: public/class-super-simple-events.php:561
+msgid "Parent Event Type:"
+msgstr "Hoger gelegen evenement type"
+
+#: public/class-super-simple-events.php:562
+msgid "Edit Event Type"
+msgstr "Bewerk evenement type"
+
+#: public/class-super-simple-events.php:563
+msgid "Update Event Type"
+msgstr "Evenement type bijwerken"
+
+#: public/class-super-simple-events.php:564
+msgid "Add New Event Type"
+msgstr "Voeg nieuw evenement type toe"
+
+#: public/class-super-simple-events.php:565
+msgid "New Event Type Name"
+msgstr "Nieuw eventement type naam"
+
+#: public/class-super-simple-events.php:566
+msgid "Event Type"
+msgstr "Evenement type"
+
+#: widget/class-super-simple-events-widget.php:59
+#, php-format
+msgid "Upcoming Events (%s)"
+msgstr "Aankomende evenementen (%s)"
+
+#: widget/class-super-simple-events-widget.php:62
+#, php-format
+msgid "Display a list of upcoming events created in the %s plugin"
+msgstr "Overzicht van de aankomende evenementen gemaakt met de %s plugin"
+
+#: widget/class-super-simple-events-widget.php:113
+msgid "Upcoming Events"
+msgstr "Aankomende evenementen"
+
+#: widget/views/admin.php:6
+msgid "Title:"
+msgstr "Titel:"
+
+#: widget/views/admin.php:9
+msgid "Number of events to show:"
+msgstr "Aantal evenementen tonen:"
+
+#: widget/views/widget.php:16
+msgid "No upcoming events"
+msgstr "Geen aankomende evenementen"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.jonathandavidharris.co.uk/scripts/super-simple-events/"
+msgstr "http://www.jonathandavidharris.co.uk/scripts/super-simple-events/"
+
+#. Author of the plugin/theme
+msgid "Jonathan Harris"
+msgstr "Jonathan Harris"
+
+#. Author URI of the plugin/theme
+msgid "http://www.jonathandavidharris.co.uk/"
+msgstr "http://www.jonathandavidharris.co.uk/"
