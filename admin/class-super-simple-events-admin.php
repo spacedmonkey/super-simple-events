@@ -49,6 +49,12 @@ class Super_Simple_Events_Admin {
 	private function __construct() {
 
 		if( ! is_super_admin() ) {
+			if ( current_user_can('publish_posts') ) {
+				$this->plugin = Super_Simple_Events::get_instance();
+				add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
+				add_action( 'save_post', array( $this, 'save_post' ) );  
+			}
+			
 			return;
 		} 
 
@@ -101,7 +107,7 @@ class Super_Simple_Events_Admin {
 	 */
 	public static function get_instance() {
 
-		if( ! is_super_admin() ) {
+		if( ! current_user_can('publish_posts') ) {
 			return;
 		}
 
