@@ -49,6 +49,16 @@ class Super_Simple_Events_Admin {
 	private function __construct() {
 
 		if( ! is_super_admin() ) {
+			if ( current_user_can('publish_posts') ) {
+				$this->plugin = Super_Simple_Events::get_instance();
+				add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
+				add_action( 'save_post', array( $this, 'save_post' ) );  
+				add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_post_styles' ) );
+				add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_post_scripts' ) );
+				add_action( 'manage_'.$this->plugin->get_plugin_slug().'_posts_custom_column' , array( $this, 'custom_columns'), 10, 2 );
+				add_filter( 'manage_edit-'.$this->plugin->get_plugin_slug().'_columns' , array( $this, 'add_column') );
+			}
+			
 			return;
 		} 
 
@@ -101,7 +111,7 @@ class Super_Simple_Events_Admin {
 	 */
 	public static function get_instance() {
 
-		if( ! is_super_admin() ) {
+		if( ! current_user_can('publish_posts') ) {
 			return;
 		}
 
