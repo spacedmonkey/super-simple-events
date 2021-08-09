@@ -1,7 +1,7 @@
 === Super Simple Events ===
 
 Contributors: spacedmonkey
-Donate link: http://www.jonathandavidharris.co.uk/
+Donate link: https://github.com/sponsors/spacedmonkey
 Tags: events, custom post type, events list, widget
 Requires at least: 3.8
 Tested up to: 4.1
